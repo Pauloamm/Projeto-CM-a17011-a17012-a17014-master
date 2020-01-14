@@ -2,6 +2,7 @@ package com.example.floristav100
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -53,9 +54,19 @@ class SignUpActivity : AppCompatActivity() {
         ref.createUserWithEmailAndPassword(emailView.text.toString(), passwordView.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Account Created Successfully",
-                        Toast.LENGTH_SHORT).show()
-                        finish()
+
+                    val user = ref.currentUser
+
+                    user?.sendEmailVerification()
+                        ?.addOnCompleteListener { task ->
+                            if(task.isSuccessful){
+                                Toast.makeText(this, "Account Created Successfully",
+                                    Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
+                        }
+
+
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(this, "An Error Occurred. Try Again!",

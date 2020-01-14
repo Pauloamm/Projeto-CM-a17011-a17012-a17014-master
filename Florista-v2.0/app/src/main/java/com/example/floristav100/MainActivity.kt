@@ -25,11 +25,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        //setSupportActionBar(toolbar)
         getSupportActionBar()!!.setTitle("D.Lurdes");
 
         // Gets reference from correspondent node in Firebase of Bouquet storage
-        ref = FirebaseDatabase.getInstance().getReference("Bouquets")
+        ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
 
 
         // Created predefined bouquets(not stored in Firebase)

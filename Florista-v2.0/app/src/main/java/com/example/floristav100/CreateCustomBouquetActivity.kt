@@ -26,7 +26,7 @@ class CreateCustomBouquetActivity : AppCompatActivity() {
         getSupportActionBar()!!.setTitle("D.Lurdes");
 
         // Gets reference from correspondent node in firebase of Bouquet storage
-        ref = FirebaseDatabase.getInstance().getReference("Bouquets")
+        ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
 
 
         // Sets up custom adapter

@@ -46,8 +46,8 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         if (passwordView.text.toString().isEmpty()){
-            emailView.error = "Please Enter Password"
-            emailView.requestFocus()
+            passwordView.error = "Please Enter Password"
+            passwordView.requestFocus()
             return
         }
 
@@ -69,7 +69,7 @@ class SignUpActivity : AppCompatActivity() {
 
                 } else {
                     // If sign in fails, display a message to the user.
-                    Toast.makeText(this, "An Error Occurred. Try Again!",
+                    Toast.makeText(this, "Password too Short. Try Again!",
                         Toast.LENGTH_SHORT).show()
                 }
 

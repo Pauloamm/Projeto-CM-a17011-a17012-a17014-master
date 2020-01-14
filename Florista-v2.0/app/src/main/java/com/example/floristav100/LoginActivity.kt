@@ -3,6 +3,7 @@ package com.example.floristav100
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.text.Editable
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -65,11 +66,12 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-   // public override fun onStart() {
-    //    super.onStart()
-    //    val currentUser = ref.currentUser
-    //    updateUI(currentUser)
-   // }
+    public override fun onStart() {
+        super.onStart()
+        val currentUser = ref.currentUser
+        if (currentUser != null)
+            emailView.text = Editable.Factory.getInstance().newEditable(currentUser.email)
+    }
 
     private fun updateUI(currentUser : FirebaseUser?){
 
@@ -86,7 +88,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         else {
-            Toast.makeText(baseContext, "Login failed.",
+            Toast.makeText(baseContext, "Wrong Email/Password. Try again",
                 Toast.LENGTH_SHORT).show()
 
         }

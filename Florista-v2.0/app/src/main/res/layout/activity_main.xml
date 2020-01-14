@@ -44,7 +44,7 @@
             android:layout_alignParentEnd="false"
             android:layout_alignParentBottom="false"
             android:layout_gravity="bottom|center"
-            android:layout_marginStart="177dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="9dp"
             android:layout_marginEnd="157dp"
             app:srcCompat="@android:drawable/ic_input_add" />
@@ -65,6 +65,18 @@
             android:maxHeight="64dp"
             android:scaleType="fitCenter"
             android:src="@drawable/checkout" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+
+
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:maxWidth="100dp"
+            android:maxHeight="100dp"
+            app:srcCompat="@drawable/dlurdes_logo" />
 
     </RelativeLayout>
 

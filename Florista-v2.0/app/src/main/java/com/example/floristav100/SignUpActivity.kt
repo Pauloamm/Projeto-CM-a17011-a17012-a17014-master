@@ -19,9 +19,9 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var ref : FirebaseAuth
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_signup)
         ref = FirebaseAuth.getInstance()
 
 
@@ -58,11 +58,10 @@ class SignUpActivity : AppCompatActivity() {
                         finish()
                 } else {
                     // If sign in fails, display a message to the user.
-                    Toast.makeText(this, "Authentication failed.",
+                    Toast.makeText(this, "An Error Occurred. Try Again!",
                         Toast.LENGTH_SHORT).show()
                 }
 
-                // ...
             }
     }
 }

@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:visibility="visible">
 
 
     <LinearLayout
@@ -13,24 +13,24 @@
         android:padding="16dp">
 
         <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:src="@drawable/checkout" />
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/checkout" />
 
         <EditText
-        android:id="@+id/emailView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
+            android:id="@+id/emailView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
 
         <EditText
-        android:id="@+id/passwordView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword"/>
+            android:id="@+id/passwordView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/LoginButtonView"
@@ -40,7 +40,7 @@
             android:padding="16dp"
             android:text="Login"
             android:textColor="@android:color/white"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -48,11 +48,11 @@
         android:id="@+id/SignUpButtonView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@color/colorPrimaryDark"
         android:padding="16dp"
         android:text="Create New Account"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:layout_alignParentBottom="true"/>
+        android:textSize="18sp" />
 
 </RelativeLayout>

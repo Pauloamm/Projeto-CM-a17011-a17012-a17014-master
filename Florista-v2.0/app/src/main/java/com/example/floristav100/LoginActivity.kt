@@ -44,8 +44,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         if (passwordView.text.toString().isEmpty()){
-            emailView.error = "Please Enter Password"
-            emailView.requestFocus()
+            passwordView.error = "Please Enter Password"
+            passwordView.requestFocus()
             return
         }
 

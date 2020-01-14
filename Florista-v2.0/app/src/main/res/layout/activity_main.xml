@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ListView
+        android:id="@+id/bouquetListView"
+        android:layout_width="match_parent"
+        android:layout_height="659dp"
+        android:layout_alignBottom="@id/appBarLayout"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="72dp">
+
+    </ListView>
+
+    <RelativeLayout
+
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:gravity="bottom"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addNewBouquet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:layout_alignStart="@id/toolbar"
+            android:layout_alignTop="@id/toolbar"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentBottom="false"
+            android:layout_gravity="bottom|center"
+            android:layout_marginStart="177dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="157dp"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+        <ImageButton
+            android:id="@+id/checkoutButtonView"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="341dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="6dp"
+            android:adjustViewBounds="true"
+            android:background="@color/colorPrimary"
+            android:maxWidth="64dp"
+            android:maxHeight="64dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/checkout" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

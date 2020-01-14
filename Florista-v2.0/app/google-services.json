@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "222107723306",
+    "firebase_url": "https://florista-916f9.firebaseio.com",
+    "project_id": "florista-916f9",
+    "storage_bucket": "florista-916f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222107723306:android:c499dbb70f79ca9afb0553",
+        "android_client_info": {
+          "package_name": "com.example.floristav100"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222107723306-d77uek8kkg5rh8ioaa37277vsfs6l0d0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.floristav100",
+            "certificate_hash": "980c2472a9ccecebb141fb792f950aa4ad863e38"
+          }
+        },
+        {
+          "client_id": "222107723306-2pse7u35f1g32u7nt5eifq8ut4dq3rgm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD70IIhI20YOqoYjAFdE3r-2pa_2ZdotXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222107723306-2pse7u35f1g32u7nt5eifq8ut4dq3rgm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

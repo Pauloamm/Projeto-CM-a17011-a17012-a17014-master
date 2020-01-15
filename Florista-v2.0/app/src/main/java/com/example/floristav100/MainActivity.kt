@@ -54,6 +54,29 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
+
+    //------------------------ BOTAO SETTINGS ACC
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detalhe_menu,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_settings -> {
+                startActivity(Intent(this, AccountSettingsActivity::class.java))
+
+
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    //------------------------ BOTAO SETTINGS ACC
+
+
+
     // Creates 3 predefined Bouquets that are not stored in Firebase
     private fun predefinedBouquetsCreation() {
         var flowersListForPredefinedBouquet: MutableList<Flowers> = ArrayList<Flowers>()

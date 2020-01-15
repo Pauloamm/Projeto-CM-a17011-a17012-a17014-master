@@ -50,7 +50,10 @@ class ResetPasswordActivity : AppCompatActivity() {
                     ).show()
                     finish()
                 } else {
-
+                    Toast.makeText(
+                        this, "No Account Associated with this Email",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }

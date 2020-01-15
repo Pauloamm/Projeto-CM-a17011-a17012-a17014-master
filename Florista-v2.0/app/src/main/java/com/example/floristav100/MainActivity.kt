@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_settings -> {
-                startActivity(Intent(this, AccountSettingsActivity::class.java))
+                startActivityForResult(Intent(this, AccountSettingsActivity::class.java), 2)
 
 
                 return true
@@ -295,7 +295,12 @@ class MainActivity : AppCompatActivity() {
             // Updates listView
             bouquetListView.adapter = BouquetAdapter()
 
+
+
         }
+
+        // DEPOIS DE APAGAR - SAIR
+        else if(requestCode == 2 && resultCode == Activity.RESULT_OK) finish()
 
     }
 

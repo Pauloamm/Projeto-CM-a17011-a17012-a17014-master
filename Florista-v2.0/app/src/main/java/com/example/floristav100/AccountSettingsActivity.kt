@@ -1,22 +1,29 @@
 package com.example.floristav100
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_account_settings.*
 import kotlinx.android.synthetic.main.activity_login.*
 
 class AccountSettingsActivity : AppCompatActivity() {
 
     private lateinit var ref: FirebaseAuth
+    private lateinit var  refForDelete : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_settings)
+
         ref = FirebaseAuth.getInstance()
 
+        refForDelete = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
 
         NewEmailButtonView.setOnClickListener {
             newEmailAccount()
@@ -27,6 +34,22 @@ class AccountSettingsActivity : AppCompatActivity() {
             newPasswordAccount()
         }
 
+        DeleteAccountButtonView.setOnClickListener{
+            deleteAccount()
+        }
+
+    }
+
+    fun deleteAccount(){
+        // Removes the Account
+        ref.currentUser!!.delete()
+
+        // Removes the node from the Firebase of the selected account
+        refForDelete.removeValue()
+
+        var intent = Intent()
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
 
@@ -56,8 +79,14 @@ class AccountSettingsActivity : AppCompatActivity() {
         }
 
         if (newEmailView.text.toString() == currentEmailView.text.toString()) {
-            newEmailView.error = "Emails Must not Match"
-            newEmailView.requestFocus()
+            currentEmailView.error = "Emails Must not Match"
+            currentEmailView.requestFocus()
+            return
+        }
+
+        if (currentEmailView.text.toString() != ref.currentUser!!.email){
+            currentEmailView.error = "This Account is not Associated with this Email"
+            currentEmailView.requestFocus()
             return
         }
 
@@ -109,8 +138,8 @@ class AccountSettingsActivity : AppCompatActivity() {
             return
         }
         if (currentPasswordView.text.toString() == newPasswordView.text.toString()) {
-            confirmNewPasswordView.error = "Passwords Must not Match"
-            confirmNewPasswordView.requestFocus()
+            newPasswordView.error = "Passwords Must not Match"
+            newPasswordView.requestFocus()
             return
         }
 

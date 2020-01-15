@@ -1,6 +1,7 @@
 package com.example.floristav100
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,16 +11,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.example.floristav100.FlowerTypes.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_signup.*
+import kotlinx.android.synthetic.main.dialog_password_check.*
+import kotlinx.android.synthetic.main.dialog_password_check.view.*
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
     var bouquetList : MutableList<Bouquets> = ArrayList<Bouquets>()
     lateinit var ref: DatabaseReference
-
+    lateinit var refToConfirmPassword : FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         // Gets reference from correspondent node in Firebase of Bouquet storage
         ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
+        refToConfirmPassword = FirebaseAuth.getInstance()
 
 
         // Created predefined bouquets(not stored in Firebase)
@@ -65,8 +71,42 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_settings -> {
-                startActivityForResult(Intent(this, AccountSettingsActivity::class.java), 2)
 
+
+
+                //--------------------------------
+                var dialog = AlertDialog.Builder(this)
+                val dialogView = layoutInflater.inflate(R.layout.dialog_password_check,null)
+                dialog.setView(dialogView)
+                dialog.setCancelable(true)
+
+
+                // dialog.show()
+
+
+                //val customDialog = dialog.create()
+
+                //customDialog.show()
+                dialog.show()
+
+               // customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener{
+                    dialogView.DialogPasswordButtonView.setOnClickListener{
+
+                    refToConfirmPassword.signInWithEmailAndPassword(refToConfirmPassword.currentUser!!.email.toString(), dialogView.dialogPasswordView.text.toString())
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                startActivityForResult(Intent(this, AccountSettingsActivity::class.java), 2)
+                            }
+                            else
+                            {
+                                dialogView.dialogPasswordView.error = "Wrong Password"
+                                dialogView.dialogPasswordView.requestFocus()
+                            }
+                        }
+
+
+                }
+                //--------------------------------
 
                 return true
             }

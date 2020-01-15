@@ -25,6 +25,7 @@
         android:hint="Email"
         android:inputType="textEmailAddress" />
 
+
         <EditText
         android:id="@+id/passwordView"
         android:layout_width="match_parent"

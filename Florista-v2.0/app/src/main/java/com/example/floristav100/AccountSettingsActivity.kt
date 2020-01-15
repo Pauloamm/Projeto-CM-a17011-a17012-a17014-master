@@ -116,11 +116,7 @@ class AccountSettingsActivity : AppCompatActivity() {
 
 
     fun newPasswordAccount() {
-        if (currentPasswordView.text.toString().isEmpty()) {
-            currentPasswordView.error = "Please Enter the Current Password"
-            currentPasswordView.requestFocus()
-            return
-        }
+
         if (newPasswordView.text.toString().isEmpty()) {
             newPasswordView.error = "Please Enter the New Password"
             newPasswordView.requestFocus()
@@ -137,11 +133,7 @@ class AccountSettingsActivity : AppCompatActivity() {
             confirmNewPasswordView.requestFocus()
             return
         }
-        if (currentPasswordView.text.toString() == newPasswordView.text.toString()) {
-            newPasswordView.error = "Passwords Must not Match"
-            newPasswordView.requestFocus()
-            return
-        }
+
 
 
         ref.currentUser!!.updatePassword(newPasswordView.text.toString())

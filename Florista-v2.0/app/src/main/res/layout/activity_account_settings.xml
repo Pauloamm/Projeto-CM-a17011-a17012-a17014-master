@@ -43,12 +43,7 @@
             android:textSize="18sp" />
 
 
-        <EditText
-            android:id="@+id/currentPasswordView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Current Password"
-            android:inputType="textPassword" />
+
 
         <EditText
             android:id="@+id/newPasswordView"

@@ -51,6 +51,13 @@ class SignUpActivity : AppCompatActivity() {
             return
         }
 
+        if (confirmPassowrdView.text.toString() != passwordView.text.toString()){
+            confirmPassowrdView.error = "Passwords do not Match"
+            confirmPassowrdView.requestFocus()
+            return
+        }
+
+
         ref.createUserWithEmailAndPassword(emailView.text.toString(), passwordView.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {

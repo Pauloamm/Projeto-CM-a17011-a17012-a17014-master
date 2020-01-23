@@ -28,7 +28,7 @@ class EditBouquetActivity : AppCompatActivity (){
         var bouquetReceived = intent.getSerializableExtra("CurrentBouquet") as Bouquets
 
         // Gets reference from correspondent node in firebase of Bouquet storage
-         ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
+         ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! +"/Available Bouquets")
 
         // Creates a flower selection manager with the starting values as the ones of the bouquet
         flowerSelectionManager = FlowerSelection(bouquetReceived)

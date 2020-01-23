@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         getSupportActionBar()!!.setTitle("D.Lurdes");
 
         // Gets reference from correspondent node in Firebase of Bouquet storage
-        ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
+        ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! +"/Available Bouquets")
         refToConfirmPassword = FirebaseAuth.getInstance()
 
 
@@ -247,7 +247,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             intent.putExtra("BouquetCounter", bouquetCounter)
+
+            if(bouquetCounter > 0)
             startActivity(intent)
+            else
+                Toast.makeText(this,"No Bouquets Selected for Checkout!", Toast.LENGTH_LONG).show()
+
+
 
         }
 

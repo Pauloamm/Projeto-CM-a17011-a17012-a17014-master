@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:visibility="visible">
+    android:visibility="visible"
+    android:background="@drawable/background">
 
 
     <LinearLayout
@@ -13,60 +14,61 @@
         android:padding="16dp">
 
         <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_gravity="center"
-            android:src="@drawable/dlurdes_logo" />
+            android:src="@drawable/logotipo" />
+
 
         <EditText
             android:id="@+id/emailView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="312dp"
+            android:layout_height="63dp"
+            android:layout_gravity="center"
+            android:background="@drawable/username"
             android:hint="Email"
             android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/passwordView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="311dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:background="@drawable/password"
             android:hint="Password"
             android:inputType="textPassword" />
 
-        <Button
+        <ImageButton
             android:id="@+id/LoginButtonView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:padding="16dp"
-            android:text="Login"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:layout_width="311dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center"
+            android:background="@drawable/login"
+            android:padding="16dp" />
 
-        <TextView
+        <ImageButton
             android:id="@+id/ResetPasswordButtonView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Forgot Password?"
-            android:textSize="20dp"
-            android:padding="15dp"/>
+            android:layout_width="80dp"
+            android:layout_height="15dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="45dp"
+            android:background="@drawable/forgotpassword"
+            android:padding="8dp"
+            android:scaleType="center" />
 
 
     </LinearLayout>
 
 
-
-
-    <Button
+    <ImageButton
         android:id="@+id/SignUpButtonView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="188dp"
+        android:layout_height="12dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark"
-        android:padding="16dp"
-        android:text="Create New Account"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/signinnow"
+        android:padding="16dp" />
 
 
 </RelativeLayout>

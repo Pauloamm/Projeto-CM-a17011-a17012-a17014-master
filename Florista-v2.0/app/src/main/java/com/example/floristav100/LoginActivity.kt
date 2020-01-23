@@ -25,7 +25,9 @@ class LoginActivity : AppCompatActivity() {
            startActivity(Intent(this, SignUpActivity::class.java))
         }
 
-
+        ResetPasswordButtonView.setOnClickListener{
+            startActivity(Intent(this, ResetPasswordActivity::class.java))
+        }
         LoginButtonView.setOnClickListener{
             login()
         }
@@ -71,6 +73,7 @@ class LoginActivity : AppCompatActivity() {
         val currentUser = ref.currentUser
         if (currentUser != null)
             emailView.text = Editable.Factory.getInstance().newEditable(currentUser.email)
+
     }
 
     private fun updateUI(currentUser : FirebaseUser?){

@@ -42,7 +42,20 @@
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/ResetPasswordButtonView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Forgot Password?"
+            android:textSize="20dp"
+            android:padding="15dp"/>
+
+
     </LinearLayout>
+
+
+
 
     <Button
         android:id="@+id/SignUpButtonView"
@@ -54,5 +67,6 @@
         android:text="Create New Account"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
+
 
 </RelativeLayout>

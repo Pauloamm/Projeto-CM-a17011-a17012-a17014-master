@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background">
 
 
 
@@ -13,42 +14,53 @@
         android:padding="16dp">
 
         <ImageView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_gravity="center"
-        android:src="@drawable/dlurdes_logo" />
+        android:src="@drawable/logotipo" />
 
         <EditText
-        android:id="@+id/emailView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
+            android:id="@+id/emailView"
+            android:layout_width="307dp"
+            android:layout_height="61dp"
+            android:layout_gravity="center"
+            android:background="@drawable/username"
+            android:gravity="center"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
 
 
         <EditText
-        android:id="@+id/passwordView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword"/>
+            android:id="@+id/passwordView"
+            android:layout_width="307dp"
+            android:layout_height="57dp"
+            android:layout_gravity="center"
+            android:background="@drawable/password"
+            android:gravity="center"
+            android:hint="Password"
+            android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/confirmPassowrdView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="306dp"
+            android:layout_height="58dp"
+            android:layout_gravity="center"
+            android:background="@drawable/password"
+            android:gravity="center"
             android:hint="Confirm Password"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/CreateAccountButtonView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:padding="16dp"
+            android:layout_width="305dp"
+            android:layout_height="58dp"
+            android:layout_gravity="center"
+            android:background="@drawable/botao"
+            android:gravity="center"
+            android:padding="0dp"
             android:text="Create Account"
             android:textColor="@android:color/white"
-            android:textSize="18sp"/>
+            android:textSize="20dp" />
 
     </LinearLayout>
 

@@ -26,6 +26,7 @@
             android:layout_height="63dp"
             android:layout_gravity="center"
             android:background="@drawable/username"
+            android:gravity="center"
             android:hint="Email"
             android:inputType="textEmailAddress" />
 
@@ -35,6 +36,7 @@
             android:layout_height="56dp"
             android:layout_gravity="center"
             android:background="@drawable/password"
+            android:gravity="center"
             android:hint="Password"
             android:inputType="textPassword" />
 

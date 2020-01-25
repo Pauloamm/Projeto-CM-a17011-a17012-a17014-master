@@ -1,4 +1,4 @@
-package com.example.floristav100
+package com.example.floristav100.Menus
 
 import android.app.Activity
 import android.content.Intent
@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.floristav100.BusinessAccountInfo.UserInfo
 import com.example.floristav100.FlowerTypes.*
+import com.example.floristav100.R
 import com.paypal.android.sdk.payments.PayPalConfiguration
 import com.paypal.android.sdk.payments.PayPalPayment
 import com.paypal.android.sdk.payments.PayPalService
@@ -66,7 +68,8 @@ class CheckoutActivity : AppCompatActivity(){
         paypalButton.text = "PayPal: " + priceToPay + "€"
 
 
-        config = PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(UserInfo.client_id)
+        config = PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(
+            UserInfo.client_id)
         var intent = Intent(this, PayPalService::class.java)
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config)
         startService(intent)

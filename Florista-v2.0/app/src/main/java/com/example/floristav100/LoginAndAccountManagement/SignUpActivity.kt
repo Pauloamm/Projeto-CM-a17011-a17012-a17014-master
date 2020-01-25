@@ -1,13 +1,11 @@
-package com.example.floristav100
+package com.example.floristav100.LoginAndAccountManagement
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.floristav100.R
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.emailView
 import kotlinx.android.synthetic.main.activity_login.passwordView
 import kotlinx.android.synthetic.main.activity_signup.*

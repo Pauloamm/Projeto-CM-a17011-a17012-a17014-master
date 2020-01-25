@@ -1,4 +1,4 @@
-package com.example.floristav100
+package com.example.floristav100.AccountSettingsAndInfo
 
 import android.app.Activity
 import android.content.Intent
@@ -6,11 +6,12 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.floristav100.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_account_settings.*
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_main_menu.*
 
 class AccountSettingsActivity : AppCompatActivity() {
 
@@ -24,6 +25,11 @@ class AccountSettingsActivity : AppCompatActivity() {
         ref = FirebaseAuth.getInstance()
 
         refForDelete = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
+
+
+        usernameTextView.text = ref.currentUser!!.displayName
+        emailTextView.text = ref.currentUser!!.email
+
 
         NewEmailButtonView.setOnClickListener {
             newEmailAccount()

@@ -1,4 +1,4 @@
-package com.example.floristav100
+package com.example.floristav100.AccountSettingsAndInfo
 
 object UserIdFirebase {
 

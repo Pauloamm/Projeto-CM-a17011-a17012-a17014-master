@@ -1,9 +1,9 @@
-package com.example.floristav100
+package com.example.floristav100.Menus
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.text.method.ScrollingMovementMethod
 import androidx.appcompat.app.AppCompatActivity
+import com.example.floristav100.R
 import kotlinx.android.synthetic.main.activity_history.*
 
 class HistoryActivity : AppCompatActivity() {

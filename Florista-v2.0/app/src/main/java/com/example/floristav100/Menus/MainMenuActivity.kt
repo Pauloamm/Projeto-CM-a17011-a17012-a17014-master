@@ -1,11 +1,12 @@
-package com.example.floristav100
+package com.example.floristav100.Menus
 
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.floristav100.AccountSettingsAndInfo.AccountSettingsActivity
+import com.example.floristav100.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main_menu.*
 import kotlinx.android.synthetic.main.dialog_password_check.view.*
@@ -35,13 +36,13 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
         historyButtonView.setOnClickListener{
-            var intent = Intent(this,HistoryActivity::class.java)
+            var intent = Intent(this, HistoryActivity::class.java)
             startActivity(intent)
         }
 
 
         availableBouquetsButtonView.setOnClickListener{
-            var intent = Intent(this,MainActivity::class.java)
+            var intent = Intent(this, AvailableBouquetsActivity::class.java)
             startActivity(intent)
 
         }
@@ -79,7 +80,7 @@ class MainMenuActivity : AppCompatActivity() {
 
     fun dialog(){
         //--------------------------------
-        var dialog = AlertDialog.Builder(this)
+        var dialog = AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK)
         val dialogView = layoutInflater.inflate(R.layout.dialog_password_check,null)
         dialog.setView(dialogView)
         dialog.setCancelable(true)

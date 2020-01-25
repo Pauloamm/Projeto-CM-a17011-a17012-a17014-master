@@ -86,17 +86,16 @@ class MainMenuActivity : AppCompatActivity() {
         dialog.setCancelable(true)
 
 
-        // dialog.show()
-
-
-        //val customDialog = dialog.create()
-
-        //customDialog.show()
         dialog.show()
 
-        // customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener{
         dialogView.DialogPasswordButtonView.setOnClickListener{
 
+            if (dialogView.dialogPasswordView.text.toString().isEmpty()){
+                dialogView.dialogPasswordView.error = "Please Enter Password"
+                dialogView.dialogPasswordView.requestFocus()
+
+            }
+            else
             ref.signInWithEmailAndPassword(ref.currentUser!!.email.toString(), dialogView.dialogPasswordView.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
@@ -104,6 +103,7 @@ class MainMenuActivity : AppCompatActivity() {
                     }
                     else
                     {
+
                         dialogView.dialogPasswordView.error = "Wrong Password"
                         dialogView.dialogPasswordView.requestFocus()
                     }

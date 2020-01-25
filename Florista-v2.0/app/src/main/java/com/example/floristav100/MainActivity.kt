@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //setSupportActionBar(toolbar)
-        getSupportActionBar()!!.setTitle("D.Lurdes");
+
 
         // Gets reference from correspondent node in Firebase of Bouquet storage
         ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! +"/Available Bouquets")

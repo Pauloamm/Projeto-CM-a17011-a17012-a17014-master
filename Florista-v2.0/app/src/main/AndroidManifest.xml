@@ -18,6 +18,7 @@
         <activity android:name=".AccountSettingsActivity"></activity>
         <activity android:name=".ResetPasswordActivity"></activity>
         <activity android:name=".MainMenuActivity"></activity>
+        <activity android:name=".HistoryActivity"></activity>
 
         <activity
 

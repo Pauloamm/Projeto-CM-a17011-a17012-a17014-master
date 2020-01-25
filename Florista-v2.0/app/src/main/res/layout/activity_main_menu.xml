@@ -55,42 +55,54 @@
 
     <TextView
         android:id="@+id/usernameTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="226dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="185dp"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="167dp"
+        android:layout_marginEnd="0dp"
         android:text="TextView"
         android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/emailTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="224dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="186dp"
         android:layout_marginTop="104dp"
-        android:layout_marginEnd="166dp"
+        android:layout_marginEnd="1dp"
         android:text="TextView"
         android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/internetTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="223dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="186dp"
         android:layout_marginTop="129dp"
-        android:layout_marginEnd="166dp"
+        android:layout_marginEnd="2dp"
         android:text="TextView"
         android:textColor="@android:color/white" />
+
+    <ImageButton
+        android:id="@+id/editButtonView"
+        android:layout_width="63dp"
+        android:layout_height="23dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="false"
+        android:layout_marginStart="258dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/edit_button"
+        android:text="Button" />
 
     <ImageButton
         android:id="@+id/historyButtonView"
@@ -139,26 +151,29 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="461dp"
         android:background="@drawable/transaction_history_button"
-        android:text="Button" />
+        />
 
-    <Button
+
+    <ImageButton
         android:id="@+id/luisInstaButtonView"
-        android:layout_width="164dp"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="48dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="227dp"
-        android:layout_marginTop="672dp"
-        android:visibility="invisible" />
-
-    <Button
-        android:id="@+id/pauloInstaButtonView"
-        android:layout_width="164dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="25dp"
         android:layout_marginTop="675dp"
-        android:visibility="invisible" />
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent" />
+
+    <ImageButton
+        android:id="@+id/pauloInstaButtonView"
+        android:layout_width="165dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="675dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent" />
 
 </RelativeLayout>

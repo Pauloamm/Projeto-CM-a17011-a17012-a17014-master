@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:visibility="visible"
-    android:background="@drawable/mainbackground">
+    android:background="@drawable/default_background">
 
 
     <ImageView
@@ -175,5 +175,19 @@
         android:layout_marginTop="675dp"
         android:layout_marginBottom="10dp"
         android:background="@android:color/transparent" />
+
+    <ImageView
+        android:id="@+id/developedDesigned"
+
+        android:layout_width="363dp"
+        android:layout_height="66dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/developed_designed_image" />
+
 
 </RelativeLayout>

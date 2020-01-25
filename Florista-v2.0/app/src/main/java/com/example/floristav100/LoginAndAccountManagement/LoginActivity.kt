@@ -1,12 +1,14 @@
-package com.example.floristav100
+package com.example.floristav100.LoginAndAccountManagement
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.text.Editable
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
+import com.example.floristav100.Menus.MainMenuActivity
+import com.example.floristav100.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
@@ -74,6 +76,7 @@ class LoginActivity : AppCompatActivity() {
         if (currentUser != null)
             emailView.text = Editable.Factory.getInstance().newEditable(currentUser.email)
 
+        updateUI(currentUser)
     }
 
     private fun updateUI(currentUser : FirebaseUser?){
@@ -82,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
             if(currentUser.isEmailVerified) {
                 UserIdFirebase.UID = currentUser.uid
 
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, MainMenuActivity::class.java))
 
             }
             else {

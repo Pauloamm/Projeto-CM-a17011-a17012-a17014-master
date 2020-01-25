@@ -1,4 +1,4 @@
-package com.example.floristav100
+package com.example.floristav100.Menus
 
 import android.app.Activity
 import android.content.Intent
@@ -8,10 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
 import com.example.floristav100.FlowerTypes.*
+import com.example.floristav100.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.edit_activity.*
 import java.util.ArrayList
 
@@ -57,7 +58,7 @@ class EditBouquetActivity : AppCompatActivity (){
             // Returns the info to know which action the user chose
             resultIntent.putExtra("TypeOfReturn", "UPDATE")
 
-            // Returns the necessary info to update the bouquet in the MainActivity list of bouquets
+            // Returns the necessary info to update the bouquet in the AvailableBouquetsActivity list of bouquets
             resultIntent.putExtra("BouquetToUpdateId",bouquetUpdated.id )
             resultIntent.putExtra("BouquetForUpdate", bouquetUpdated)
 

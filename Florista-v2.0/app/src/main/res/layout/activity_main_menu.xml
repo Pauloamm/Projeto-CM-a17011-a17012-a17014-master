@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:visibility="visible"
-    android:background="@drawable/default_background">
+    android:background="@drawable/mainbackground">
 
 
     <ImageView
@@ -54,7 +54,7 @@
 
 
     <TextView
-        android:id="@+id/usernameTextViewSettings"
+        android:id="@+id/usernameTextView"
         android:layout_width="226dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -67,7 +67,7 @@
         android:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/emailTextViewSettings"
+        android:id="@+id/emailTextView"
         android:layout_width="224dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -80,7 +80,7 @@
         android:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/internetTextViewSettings"
+        android:id="@+id/internetTextView"
         android:layout_width="223dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -92,108 +92,88 @@
         android:text="TextView"
         android:textColor="@android:color/white" />
 
-    <EditText
-        android:id="@+id/currentEmailView"
-        android:layout_width="321dp"
-        android:layout_height="69dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="44dp"
-        android:background="@drawable/username"
-        android:gravity="center"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/newEmailView"
-        android:layout_width="321dp"
-        android:layout_height="69dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="271dp"
-        android:layout_marginEnd="44dp"
-        android:background="@drawable/username"
-        android:gravity="center"
-        android:hint=" Confirm Email"
-        android:inputType="textEmailAddress" />
-
     <ImageButton
-        android:id="@+id/NewEmailButtonView"
-        android:layout_width="321dp"
-        android:layout_height="69dp"
+        android:id="@+id/editButtonView"
+        android:layout_width="63dp"
+        android:layout_height="23dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="341dp"
-        android:layout_marginEnd="44dp"
-        android:background="@drawable/change_email_address_button"
-        android:text="Button" />
-
-    <EditText
-        android:id="@+id/newPasswordView"
-        android:layout_width="321dp"
-        android:layout_height="69dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="411dp"
-        android:layout_marginEnd="44dp"
-        android:background="@drawable/password"
-        android:gravity="center"
-        android:hint="Password"
-        android:inputType="textPassword" />
-
-
-    <EditText
-        android:id="@+id/confirmNewPasswordView"
-        android:layout_width="321dp"
-        android:layout_height="69dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="481dp"
-        android:layout_marginEnd="44dp"
-        android:background="@drawable/password"
-        android:gravity="center"
-        android:hint="Confirm Password"
-        android:inputType="textPassword" />
-
-    <ImageButton
-        android:id="@+id/NewPasswordButtonView"
-        android:layout_width="321dp"
-        android:layout_height="69dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="552dp"
-        android:layout_marginEnd="44dp"
-        android:background="@drawable/change_password_button"
+        android:layout_centerHorizontal="false"
+        android:layout_marginStart="258dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/edit_button"
         android:text="Button" />
 
     <ImageButton
-        android:id="@+id/DeleteAccountButtonView"
-        android:layout_width="391dp"
-        android:layout_height="82dp"
+        android:id="@+id/historyButtonView"
+        android:layout_width="384dp"
+        android:layout_height="75dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="232dp"
+        android:background="@drawable/history_button"
+        android:text="Button" />
+
+    <ImageButton
+        android:id="@+id/availableBouquetsButtonView"
+        android:layout_width="384dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="false"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="309dp"
+        android:background="@drawable/available_bouquets_button"
+        android:text="Button" />
+
+    <ImageButton
+        android:id="@+id/createCustomBouquetButtonView"
+        android:layout_width="384dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="385dp"
+        android:background="@drawable/create_custom_bouquet_button"
+        android:text="Button" />
+
+
+    <ImageButton
+        android:id="@+id/transactionHistoryButtonView"
+        android:layout_width="384dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="461dp"
+        android:background="@drawable/transaction_history_button"
+        />
+
+
+    <ImageButton
+        android:id="@+id/luisInstaButtonView"
+        android:layout_width="165dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="-2dp"
-        android:background="@drawable/delete_account_button"
-        android:text="Button" />
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="675dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent" />
+
+    <ImageButton
+        android:id="@+id/pauloInstaButtonView"
+        android:layout_width="165dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="675dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent" />
 
 </RelativeLayout>

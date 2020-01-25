@@ -80,7 +80,7 @@
         android:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/internetTextViewSettings"
+        android:id="@+id/internetTextView"
         android:layout_width="223dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -92,21 +92,34 @@
         android:text="TextView"
         android:textColor="@android:color/white" />
 
-    <EditText
-        android:id="@+id/currentEmailView"
-        android:layout_width="321dp"
-        android:layout_height="69dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="44dp"
-        android:background="@drawable/username"
-        android:gravity="center"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
+
+
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/currentEmailView"
+            android:layout_width="321dp"
+            android:layout_height="69dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="44dp"
+            android:background="@drawable/username"
+            android:gravity="center"
+            android:hint="Current Email"
+            android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/newEmailView"
@@ -121,7 +134,7 @@
         android:layout_marginEnd="44dp"
         android:background="@drawable/username"
         android:gravity="center"
-        android:hint=" Confirm Email"
+        android:hint="New Email"
         android:inputType="textEmailAddress" />
 
     <ImageButton
@@ -170,18 +183,24 @@
         android:hint="Confirm Password"
         android:inputType="textPassword" />
 
-    <ImageButton
-        android:id="@+id/NewPasswordButtonView"
-        android:layout_width="321dp"
-        android:layout_height="69dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="552dp"
-        android:layout_marginEnd="44dp"
-        android:background="@drawable/change_password_button"
-        android:text="Button" />
+        <ImageButton
+
+            android:id="@+id/NewPasswordButtonView"
+            android:layout_width="321dp"
+            android:layout_height="69dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="552dp"
+            android:layout_marginEnd="44dp"
+            android:background="@drawable/change_password_button"
+            android:text="Button" />
+
+
+
+        </RelativeLayout>
+</ScrollView>
 
     <ImageButton
         android:id="@+id/DeleteAccountButtonView"

@@ -16,19 +16,21 @@ import kotlinx.android.synthetic.main.activity_main_menu.*
 class AccountSettingsActivity : AppCompatActivity() {
 
     private lateinit var ref: FirebaseAuth
+
     private lateinit var  refForDelete : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_settings)
+        supportActionBar!!.hide()
 
         ref = FirebaseAuth.getInstance()
 
         refForDelete = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
 
 
-        usernameTextView.text = ref.currentUser!!.displayName
-        emailTextView.text = ref.currentUser!!.email
+        usernameTextViewSettings.text = ref.currentUser!!.displayName
+        emailTextViewSettings.text = ref.currentUser!!.email
 
 
         NewEmailButtonView.setOnClickListener {

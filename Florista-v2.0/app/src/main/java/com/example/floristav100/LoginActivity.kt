@@ -82,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
             if(currentUser.isEmailVerified) {
                 UserIdFirebase.UID = currentUser.uid
 
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, MainMenuActivity::class.java))
 
             }
             else {

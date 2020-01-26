@@ -5,22 +5,25 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/list_background_image">
 
     <ImageView
         android:id="@+id/bouquetImageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/bouquetNameView"
-        android:layout_width="119dp"
+        android:layout_width="210dp"
         android:layout_height="29dp"
         android:layout_alignBottom="@+id/bouquetImageView"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
 
         android:layout_toEndOf="@+id/bouquetImageView"
         android:layout_toRightOf="@+id/bouquetImageView"
@@ -37,34 +40,33 @@
         android:layout_width="119dp"
         android:layout_height="0dp"
         android:layout_alignBottom="@+id/bouquetImageView"
-        android:layout_marginTop="8dp"
         android:layout_toEndOf="@+id/bouquetImageView"
         android:layout_toRightOf="@+id/bouquetImageView"
         android:text="FLOWERCOUNT"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintHorizontal_bias="0.152"
         app:layout_constraintStart_toEndOf="@+id/bouquetImageView"
         app:layout_constraintTop_toBottomOf="@+id/bouquetNameView" />
 
     <TextView
         android:id="@+id/bouquetPriceView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="173dp"
+        android:layout_height="58dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:text="400"
-        android:textSize="40dp"
+        android:text="Preço: 400€"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.326"
-        app:layout_constraintStart_toEndOf="@+id/bouquetNameView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bouquetImageView" />
 
     <CheckBox
         android:id="@+id/checkBuyView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.floristav100
+package com.example.floristav100.Menus
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -10,17 +10,18 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.example.floristav100.AccountSettingsAndInfo.AccountSettingsActivity
+import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
 import com.example.floristav100.FlowerTypes.*
+import com.example.floristav100.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_signup.*
-import kotlinx.android.synthetic.main.dialog_password_check.*
 import kotlinx.android.synthetic.main.dialog_password_check.view.*
 import java.util.ArrayList
 
-class MainActivity : AppCompatActivity() {
+class AvailableBouquetsActivity : AppCompatActivity() {
 
     var bouquetList : MutableList<Bouquets> = ArrayList<Bouquets>()
     lateinit var ref: DatabaseReference
@@ -30,8 +31,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //setSupportActionBar(toolbar)
-        getSupportActionBar()!!.setTitle("D.Lurdes");
+        supportActionBar!!.hide()
+
 
         // Gets reference from correspondent node in Firebase of Bouquet storage
         ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! +"/Available Bouquets")
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         readingFirebaseData()
 
         // Calls and manages result from CreateCustomBouquetActivity
-        addNewBouquetManager()
+        //addNewBouquetManager()
 
         // Manages the button for the CheckoutActivity
         checkoutManager()
@@ -129,7 +130,9 @@ class MainActivity : AppCompatActivity() {
             flowersListForPredefinedBouquet.add(Sunflower())
 
         }
-        bouquetList.add(Bouquets("Shooting Star",flowersListForPredefinedBouquet,R.drawable.shootingstar))
+        bouquetList.add(Bouquets("Shooting Star",flowersListForPredefinedBouquet,
+            R.drawable.shootingstar
+        ))
 
         flowersListForPredefinedBouquet.clear()
 
@@ -141,7 +144,9 @@ class MainActivity : AppCompatActivity() {
             flowersListForPredefinedBouquet.add(Rose())
 
         }
-        bouquetList.add(Bouquets("Bloody Mary", flowersListForPredefinedBouquet, R.drawable.bloodymary))
+        bouquetList.add(Bouquets("Bloody Mary", flowersListForPredefinedBouquet,
+            R.drawable.bloodymary
+        ))
 
         flowersListForPredefinedBouquet.clear()
 
@@ -154,7 +159,9 @@ class MainActivity : AppCompatActivity() {
             flowersListForPredefinedBouquet.add(Orchid())
 
         }
-        bouquetList.add(Bouquets("Venus", flowersListForPredefinedBouquet, R.drawable.venus))
+        bouquetList.add(Bouquets("Venus", flowersListForPredefinedBouquet,
+            R.drawable.venus
+        ))
 
         flowersListForPredefinedBouquet.clear()
 
@@ -227,7 +234,7 @@ class MainActivity : AppCompatActivity() {
         checkoutButtonView.setOnClickListener{
 
 
-            val intent = Intent(this@MainActivity, CheckoutActivity::class.java)
+            val intent = Intent(this@AvailableBouquetsActivity, CheckoutActivity::class.java)
 
 
             var bouquetCounter : Int = 0
@@ -263,13 +270,13 @@ class MainActivity : AppCompatActivity() {
    // Manages the button for the CreateCustomBouquetActivity
     private fun addNewBouquetManager(){
 
-        addNewBouquet.setOnClickListener {
+        //addNewBouquet.setOnClickListener {
 
-            val intent = Intent(this@MainActivity, CreateCustomBouquetActivity::class.java)
+           // val intent = Intent(this@AvailableBouquetsActivity, CreateCustomBouquetActivity::class.java)
 
-            startActivity(intent)
+           // startActivity(intent)
 
-        }
+        //}
 
     }
 
@@ -374,7 +381,7 @@ class MainActivity : AppCompatActivity() {
             currentBouquet.UpdateCheck(checkView)
 
             var priceView = v.findViewById<TextView>(R.id.bouquetPriceView)
-            priceView.text = currentBouquet.totalPrice.toString()
+            priceView.text = "Preço: " + currentBouquet.totalPrice.toString() + "€"
 
             var checkBox = v.findViewById<CheckBox>(R.id.checkBuyView)
             checkBox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener {
@@ -399,7 +406,7 @@ class MainActivity : AppCompatActivity() {
             v.setOnClickListener{
 
 
-                var intent = Intent(this@MainActivity, EditBouquetActivity::class.java)
+                var intent = Intent(this@AvailableBouquetsActivity, EditBouquetActivity::class.java)
 
                 intent.putExtra("CurrentBouquet", getItem(position) as Bouquets)
 

@@ -1,4 +1,4 @@
-package com.example.floristav100
+package com.example.floristav100.Menus
 
 import android.app.Activity
 import android.content.Intent
@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.floristav100.BusinessAccountInfo.UserInfo
 import com.example.floristav100.FlowerTypes.*
+import com.example.floristav100.R
 import com.paypal.android.sdk.payments.PayPalConfiguration
 import com.paypal.android.sdk.payments.PayPalPayment
 import com.paypal.android.sdk.payments.PayPalService
@@ -39,7 +41,7 @@ class CheckoutActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
 
-
+        supportActionBar!!.hide()
 
         // Gets the number of selected bouquets
         var checkedBouquetCounter = intent.getIntExtra("BouquetCounter",0)
@@ -63,10 +65,11 @@ class CheckoutActivity : AppCompatActivity(){
             priceToPay += b.totalPrice
 
         }
-        paypalButton.text = "PayPal: " + priceToPay + "€"
+        paypalAmountCheckout.text = "" + priceToPay + "€"
 
 
-        config = PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(UserInfo.client_id)
+        config = PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(
+            UserInfo.client_id)
         var intent = Intent(this, PayPalService::class.java)
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config)
         startService(intent)
@@ -115,7 +118,7 @@ class CheckoutActivity : AppCompatActivity(){
 
         priceToPay -= valueToRemove
         priceToPay += valueToAdd
-        paypalButton.text = "PayPal: " + priceToPay + "€"
+        paypalAmountCheckout.text = "" + priceToPay + "€"
 
 
 
@@ -141,8 +144,8 @@ class CheckoutActivity : AppCompatActivity(){
 
 
             // Gets adding and removing flowers buttons
-            var minusButtonView = v.findViewById<Button>(R.id.checkoutMinusButton) as Button
-            var plusButtonView = v.findViewById<Button>(R.id.checkoutPlusButton) as Button
+            var minusButtonView = v.findViewById<Button>(R.id.checkoutMinusButton) as ImageButton
+            var plusButtonView = v.findViewById<Button>(R.id.checkoutPlusButton) as ImageButton
 
 
             // Gets current flower type number
@@ -153,7 +156,7 @@ class CheckoutActivity : AppCompatActivity(){
 
             var bouquetPriceView = v.findViewById<TextView>(R.id.checkoutBouquetPrice)
             var totalPriceOfCurrentBouquetQuantity = currentNumber *  currentBouquet.totalPrice
-            bouquetPriceView.text = totalPriceOfCurrentBouquetQuantity.toString()
+            bouquetPriceView.text = "Price: " + totalPriceOfCurrentBouquetQuantity.toString() + "€"
 
 
 
@@ -177,7 +180,7 @@ class CheckoutActivity : AppCompatActivity(){
                 currentNumber--
 
                 var totalPriceOfCurrentBouquetQuantity = currentNumber *  currentBouquet.totalPrice
-                bouquetPriceView.text = totalPriceOfCurrentBouquetQuantity.toString()
+                bouquetPriceView.text = "Price: " +  totalPriceOfCurrentBouquetQuantity.toString() + "€"
 
                 totalPriceUpdate(valueToRemove,totalPriceOfCurrentBouquetQuantity)
 
@@ -193,7 +196,7 @@ class CheckoutActivity : AppCompatActivity(){
                 currentNumber++
 
                 var totalPriceOfCurrentBouquetQuantity = currentNumber *  currentBouquet.totalPrice
-                bouquetPriceView.text = totalPriceOfCurrentBouquetQuantity.toString()
+                bouquetPriceView.text = "Price: " + totalPriceOfCurrentBouquetQuantity.toString() + "€"
 
                 totalPriceUpdate(valueToRemove,totalPriceOfCurrentBouquetQuantity)
 

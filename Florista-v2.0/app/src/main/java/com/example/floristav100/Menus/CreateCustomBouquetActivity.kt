@@ -1,100 +1,98 @@
-package com.example.floristav100
+package com.example.floristav100.Menus
 
-import android.app.Activity
-import android.content.Intent
+
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
+import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
 import com.example.floristav100.FlowerTypes.*
+import com.example.floristav100.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.edit_activity.*
+import kotlinx.android.synthetic.main.activity_create_custom_bouquet.*
 import java.util.ArrayList
 
-class EditBouquetActivity : AppCompatActivity (){
+class CreateCustomBouquetActivity : AppCompatActivity() {
 
-    lateinit var flowerSelectionManager : FlowerSelection
-    lateinit var ref: DatabaseReference
+    var flowerSelectionManager : FlowerSelection = FlowerSelection()
+
+    lateinit var ref : DatabaseReference
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.edit_activity)
-
-        // Gets bouquet selected
-        var bouquetReceived = intent.getSerializableExtra("CurrentBouquet") as Bouquets
+        setContentView(R.layout.activity_create_custom_bouquet)
+        supportActionBar!!.hide()
 
         // Gets reference from correspondent node in firebase of Bouquet storage
-         ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! +"/Available Bouquets")
-
-        // Creates a flower selection manager with the starting values as the ones of the bouquet
-        flowerSelectionManager = FlowerSelection(bouquetReceived)
-
-        // Gets the toolbar tiltle to be the same as the selected bouquet
-        getSupportActionBar()!!.setTitle(bouquetReceived.name)
-
-        // Updates listView
-        allFlowerTypeForEditView.adapter = FlowerTypeListUpdateAdapter()
+        ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! +"/Available Bouquets")
 
 
-        // Manages the updateButton click and substitutes value in Firebase
-        updateButton.setOnClickListener{
-
-            // Gets updated bouquet object and associates with the id of the one to be updated
-            var bouquetUpdated = updateBouquet()
-            bouquetUpdated.id = bouquetReceived.id
-
-            // Substitutes the bouquet in the Firebase
-            ref.child(bouquetReceived.id!!).setValue(bouquetUpdated)
+        // Sets up custom adapter
+        allFlowerTypeView.adapter = FlowerTypeListAdapter()
 
 
-            // Creates intent to return necessary info
-            var resultIntent = Intent()
-
-            // Returns the info to know which action the user chose
-            resultIntent.putExtra("TypeOfReturn", "UPDATE")
-
-            // Returns the necessary info to update the bouquet in the MainActivity list of bouquets
-            resultIntent.putExtra("BouquetToUpdateId",bouquetUpdated.id )
-            resultIntent.putExtra("BouquetForUpdate", bouquetUpdated)
-
-            setResult(Activity.RESULT_OK, resultIntent)
-
-            finish()
-
-
-
-        }
-
-        deleteButton.setOnClickListener{
-
-
-            // Removes the node from the Firebase of the selected bouquet
-            ref.child(bouquetReceived.id!!).removeValue()
-
-
-            // Intent made to return the id of the node removed so it can be removed from the list aswell
-            var resultIntent = Intent()
-
-            resultIntent.putExtra("TypeOfReturn", "DELETE")
-            resultIntent.putExtra("BouquetToRemoveId",bouquetReceived.id )
-
-            setResult(Activity.RESULT_OK, resultIntent)
-
-            finish()
-
-        }
+        // Manages confirmButton action
+        confirmButtonManagement()
 
     }
 
-    private fun updateBouquet() : Bouquets{
+
+    // Manages Confirm Button action
+    private fun confirmButtonManagement(){
+
+        // Manages button click
+        confirmAdd.setOnClickListener(){
+
+
+            // Creates Bouquet from selected flowers
+            var customBouquet = createCustomBouquet()
+
+
+            // If there were flowers selected
+            if(customBouquet.numberOfFlowers!! > 0){
+
+                // Gets new id in the Firebase for the new created bouquet
+                val bouquetId = ref.push().key
+                customBouquet.id = bouquetId
+
+                // Adds the new bouquet to the Firebase
+                ref.child(bouquetId!!).setValue(customBouquet).addOnCompleteListener{
+
+                    // Makes pop up message confirming the save
+                    Toast.makeText(this,"Bouquet Saved!", Toast.LENGTH_LONG).show()
+
+                }
+
+
+            }
+            else{
+
+                // Makes pop up message telling there weren't flowers selected so the bouquet was not saved
+                Toast.makeText(this,"No Flowers Selected\nBouquet Not Saved!", Toast.LENGTH_LONG).show()
+
+            }
+
+
+            // Closes current activity and return to main activity
+            finish()
+
+        }
+
+
+    }
 
 
 
-        //creates temporary flower list for custom bouquet creation
+    // Creates custom Bouquet from selected flowers
+    private fun createCustomBouquet() : Bouquets{
+
+
+
+        // Creates temporary flower list for custom bouquet creation
         var flowerListForCustomBouquet : MutableList<Flowers> = ArrayList<Flowers>()
 
         for(x in 1..flowerSelectionManager.numberSunflowerSelected) flowerListForCustomBouquet.add(Sunflower())
@@ -102,8 +100,7 @@ class EditBouquetActivity : AppCompatActivity (){
         for(x in 1..flowerSelectionManager.numberOrchidSelected) flowerListForCustomBouquet.add(Orchid())
 
 
-
-        return Bouquets("Custom Bouquet", flowerListForCustomBouquet, imageChoosing())
+        return  Bouquets("Custom Bouquet", flowerListForCustomBouquet, imageChoosing())
 
 
     }
@@ -136,7 +133,8 @@ class EditBouquetActivity : AppCompatActivity (){
         return selectedImageforShow
     }
 
-    inner class FlowerTypeListUpdateAdapter : BaseAdapter() {
+
+    inner class FlowerTypeListAdapter : BaseAdapter() {
 
 
         override fun getView(position: Int, convertView: View?, parente: ViewGroup?): View {
@@ -163,15 +161,6 @@ class EditBouquetActivity : AppCompatActivity (){
             // Gets current flower type number
             var currentFlowerTypeSelectionView =  v.findViewById(R.id.flowerTypeNumberSelection) as EditText
 
-
-
-            when(currentFlower){
-
-                is Sunflower -> currentFlowerTypeSelectionView.text = Editable.Factory.getInstance().newEditable(flowerSelectionManager.numberSunflowerSelected.toString())
-                is Rose -> currentFlowerTypeSelectionView.text = Editable.Factory.getInstance().newEditable(flowerSelectionManager.numberRoseSelected.toString())
-                is Orchid -> currentFlowerTypeSelectionView.text = Editable.Factory.getInstance().newEditable(flowerSelectionManager.numberOrchidSelected.toString())
-
-            }
 
             var currentNumber = currentFlowerTypeSelectionView.text.toString().toInt()
 
@@ -268,7 +257,5 @@ class EditBouquetActivity : AppCompatActivity (){
 
 
     }
-
-
 
 }

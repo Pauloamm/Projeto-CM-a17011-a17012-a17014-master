@@ -12,7 +12,7 @@
         android:id="@+id/bouquetImageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
         android:layout_width="210dp"
         android:layout_height="29dp"
         android:layout_alignBottom="@+id/bouquetImageView"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="8dp"
 
         android:layout_toEndOf="@+id/bouquetImageView"
@@ -44,7 +44,7 @@
         android:layout_toRightOf="@+id/bouquetImageView"
         android:text="FLOWERCOUNT"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toEndOf="@+id/bouquetImageView"
         app:layout_constraintTop_toBottomOf="@+id/bouquetNameView" />
 
@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="21dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

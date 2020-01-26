@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible"
+    android:background="@drawable/default_background">
+
+
+    <ImageView
+        android:id="@+id/avatarImageView"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="start|right"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="49dp"
+        android:src="@drawable/default_image" />
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="start|right"
+        android:layout_marginStart="163dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/username_icon" />
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="start|right"
+        android:layout_marginStart="163dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="104dp"
+        android:src="@drawable/email_icon" />
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="start|right"
+        android:layout_marginStart="163dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="129dp"
+        android:src="@drawable/internet_icon" />
+
+
+    <TextView
+        android:id="@+id/usernameTextView"
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="185dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="0dp"
+        android:text="TextView"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/emailTextView"
+        android:layout_width="224dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="186dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="1dp"
+        android:text="TextView"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/internetTextView"
+        android:layout_width="223dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="186dp"
+        android:layout_marginTop="129dp"
+        android:layout_marginEnd="2dp"
+        android:text="TextView"
+        android:textColor="@android:color/white" />
+
+    <ImageButton
+        android:id="@+id/editButtonView"
+        android:layout_width="63dp"
+        android:layout_height="23dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="false"
+        android:layout_marginStart="258dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/edit_button"
+        android:text="Button" />
+
+    <ImageButton
+        android:id="@+id/historyButtonView"
+        android:layout_width="384dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="232dp"
+        android:background="@drawable/history_button"
+        android:text="Button" />
+
+    <ImageButton
+        android:id="@+id/availableBouquetsButtonView"
+        android:layout_width="384dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="false"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="309dp"
+        android:background="@drawable/available_bouquets_button"
+        android:text="Button" />
+
+    <ImageButton
+        android:id="@+id/createCustomBouquetButtonView"
+        android:layout_width="384dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="385dp"
+        android:background="@drawable/create_custom_bouquet_button"
+        android:text="Button" />
+
+
+    <ImageButton
+        android:id="@+id/transactionHistoryButtonView"
+        android:layout_width="384dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="461dp"
+        android:background="@drawable/transaction_history_button"
+        />
+
+
+    <ImageButton
+        android:id="@+id/luisInstaButtonView"
+        android:layout_width="165dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="675dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent" />
+
+    <ImageButton
+        android:id="@+id/pauloInstaButtonView"
+        android:layout_width="165dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="675dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent" />
+
+    <ImageView
+        android:id="@+id/developedDesigned"
+
+        android:layout_width="363dp"
+        android:layout_height="66dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/developed_designed_image" />
+
+
+</RelativeLayout>

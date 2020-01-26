@@ -4,80 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".BouquetManagement.AvailableBouquetsActivity"
+    android:background="@drawable/default_background">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="61dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/available_bouquets_image" />
+
+    <ImageButton
+        android:id="@+id/checkoutButtonView"
+        android:layout_width="391dp"
+        android:layout_height="82dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="-2dp"
+        android:background="@drawable/checkout_button"
+        android:text="Button" />
 
     <ListView
         android:id="@+id/bouquetListView"
-        android:layout_width="match_parent"
-        android:layout_height="659dp"
-        android:layout_alignBottom="@id/appBarLayout"
+        android:layout_width="366dp"
+        android:layout_height="529dp"
+        android:layout_above="@+id/checkoutButtonView"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="72dp">
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="78dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp">
 
     </ListView>
-
-    <RelativeLayout
-
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        android:gravity="bottom"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="73dp"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addNewBouquet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar"
-            android:layout_alignStart="@id/toolbar"
-            android:layout_alignTop="@id/toolbar"
-            android:layout_alignParentEnd="false"
-            android:layout_alignParentBottom="false"
-            android:layout_gravity="bottom|center"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="157dp"
-            app:srcCompat="@android:drawable/ic_input_add" />
-
-        <ImageButton
-            android:id="@+id/checkoutButtonView"
-            android:layout_width="wrap_content"
-            android:layout_height="52dp"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="341dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="6dp"
-            android:adjustViewBounds="true"
-            android:background="@color/colorPrimary"
-            android:maxWidth="64dp"
-            android:maxHeight="64dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/checkout" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-
-
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="0dp"
-            android:maxWidth="100dp"
-            android:maxHeight="100dp"
-            app:srcCompat="@drawable/dlurdes_logo" />
-
-    </RelativeLayout>
 
 </RelativeLayout>

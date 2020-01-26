@@ -1,6 +1,5 @@
-package com.example.floristav100.FlowerTypes
+package com.example.floristav100.DataModels.FlowerHierarchy
 
-import android.widget.ImageView
 import java.io.Serializable
 
 

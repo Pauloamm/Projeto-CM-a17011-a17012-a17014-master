@@ -1,4 +1,10 @@
-package com.example.floristav100.FlowerTypes
+package com.example.floristav100.DataModels.Utility
+
+import com.example.floristav100.DataModels.*
+import com.example.floristav100.DataModels.FlowerHierarchy.Flowers
+import com.example.floristav100.DataModels.FlowerHierarchy.Orchid
+import com.example.floristav100.DataModels.FlowerHierarchy.Rose
+import com.example.floristav100.DataModels.FlowerHierarchy.Sunflower
 
 class FlowerSelection {
 

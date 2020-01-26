@@ -1,6 +1,10 @@
-package com.example.floristav100.FlowerTypes
+package com.example.floristav100.DataModels
 
 import android.widget.CheckBox
+import com.example.floristav100.DataModels.FlowerHierarchy.Flowers
+import com.example.floristav100.DataModels.FlowerHierarchy.Orchid
+import com.example.floristav100.DataModels.FlowerHierarchy.Rose
+import com.example.floristav100.DataModels.FlowerHierarchy.Sunflower
 import java.io.Serializable
 import java.util.ArrayList
 
@@ -18,7 +22,7 @@ class Bouquets : Serializable {
     var roseCounter : Int = 0
     var totalPrice : Int = 0
 
-    constructor( name : String, flowersList : MutableList<Flowers>, image : Int)
+    constructor(name : String, flowersList : MutableList<Flowers>, image : Int)
     {
         this.name = name
         this.flowers = flowersList

@@ -10,15 +10,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Menus.AvailableBouquetsActivity"></activity>
-        <activity android:name=".Menus.CreateCustomBouquetActivity"></activity>
+        <activity android:name=".BouquetManagement.AvailableBouquetsActivity"></activity>
+        <activity android:name=".BouquetManagement.CreateCustomBouquetActivity"></activity>
         <activity android:name=".LoginAndAccountManagement.SignUpActivity"></activity>
-        <activity android:name=".Menus.EditBouquetActivity"></activity>
-        <activity android:name=".Menus.CheckoutActivity"></activity>
+        <activity android:name=".BouquetManagement.EditBouquetActivity"></activity>
+        <activity android:name=".Payment.CheckoutActivity"></activity>
         <activity android:name=".AccountSettingsAndInfo.AccountSettingsActivity"></activity>
         <activity android:name=".LoginAndAccountManagement.ResetPasswordActivity"></activity>
         <activity android:name=".Menus.MainMenuActivity"></activity>
         <activity android:name=".Menus.HistoryActivity"></activity>
+
 
         <activity
 

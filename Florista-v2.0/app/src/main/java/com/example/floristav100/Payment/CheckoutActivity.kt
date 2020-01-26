@@ -1,4 +1,4 @@
-package com.example.floristav100.Menus
+package com.example.floristav100.Payment
 
 import android.app.Activity
 import android.content.Intent
@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.floristav100.BusinessAccountInfo.UserInfo
-import com.example.floristav100.FlowerTypes.*
+import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
+import com.example.floristav100.DataModels.*
 import com.example.floristav100.R
+import com.google.firebase.database.FirebaseDatabase
 import com.paypal.android.sdk.payments.PayPalConfiguration
 import com.paypal.android.sdk.payments.PayPalPayment
 import com.paypal.android.sdk.payments.PayPalService
@@ -22,6 +23,7 @@ import java.math.BigDecimal
 //Dlurdesflorista!1
 
 //bus-dlurdes@hotmail.com (business)
+
 //p-dlurdes@hotmail.com (client used for testing)
 //p2-dlurdes@hotmail.com
 //123456789
@@ -31,7 +33,8 @@ import java.math.BigDecimal
 class CheckoutActivity : AppCompatActivity(){
 
     // List of bouquets selected
-    var checkoutBouquetList : MutableList<Bouquets> = ArrayList<Bouquets>()
+    var checkoutBouquetList : MutableList<Bouquets> = ArrayList()
+    var bouquetsQuantity : MutableList<Int> = ArrayList()
     var priceToPay : Int = 0
 
     var config: PayPalConfiguration? = null
@@ -55,8 +58,13 @@ class CheckoutActivity : AppCompatActivity(){
 
             checkoutBouquetList.add(currentBouquet)
 
+            bouquetsQuantity.add(1)
+
 
         }
+
+
+
 
 
         // Initial total price(1 of each bouquet)
@@ -96,6 +104,8 @@ class CheckoutActivity : AppCompatActivity(){
 
     }
 
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -103,6 +113,15 @@ class CheckoutActivity : AppCompatActivity(){
 
             if (resultCode == Activity.RESULT_OK)
             {
+
+                var refToSaveTransaction = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! + "/Transaction History")
+
+
+                var newTransactionID = refToSaveTransaction.push().key
+                var newTransaction = Transaction(bouquetsQuantity, checkoutBouquetList, priceToPay)
+
+                refToSaveTransaction.child(newTransactionID!!).setValue(newTransaction)
+
                 Toast.makeText(this,"Transaction Completed!", Toast.LENGTH_LONG).show()
                 finish()
             }
@@ -184,6 +203,9 @@ class CheckoutActivity : AppCompatActivity(){
 
                 totalPriceUpdate(valueToRemove,totalPriceOfCurrentBouquetQuantity)
 
+
+                // Stores and Updates the quantity of selected bouquet
+                bouquetsQuantity[position] = currentNumber
                 currentBouquetQuantityView.text = currentNumber.toString()
 
             }
@@ -200,6 +222,9 @@ class CheckoutActivity : AppCompatActivity(){
 
                 totalPriceUpdate(valueToRemove,totalPriceOfCurrentBouquetQuantity)
 
+
+                // Stores and Updates the quantity of selected bouquet
+                bouquetsQuantity[position] = currentNumber
                 currentBouquetQuantityView.text =  currentNumber.toString()
 
 

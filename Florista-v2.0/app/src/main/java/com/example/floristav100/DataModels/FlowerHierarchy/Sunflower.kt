@@ -1,4 +1,4 @@
-package com.example.floristav100.FlowerTypes
+package com.example.floristav100.DataModels.FlowerHierarchy
 import com.example.floristav100.R
 
 class Sunflower : Flowers {

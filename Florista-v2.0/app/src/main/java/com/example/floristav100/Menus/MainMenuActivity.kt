@@ -6,6 +6,8 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.floristav100.AccountSettingsAndInfo.AccountSettingsActivity
+import com.example.floristav100.BouquetManagement.AvailableBouquetsActivity
+import com.example.floristav100.BouquetManagement.CreateCustomBouquetActivity
 import com.example.floristav100.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main_menu.*

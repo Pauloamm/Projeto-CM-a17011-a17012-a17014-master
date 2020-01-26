@@ -1,4 +1,4 @@
-package com.example.floristav100.BusinessAccountInfo
+package com.example.floristav100.Payment
 
 class UserInfo
 {

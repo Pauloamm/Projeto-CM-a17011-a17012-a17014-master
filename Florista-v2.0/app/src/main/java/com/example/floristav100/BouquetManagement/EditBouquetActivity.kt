@@ -1,4 +1,4 @@
-package com.example.floristav100.Menus
+package com.example.floristav100.BouquetManagement
 
 import android.app.Activity
 import android.content.Intent
@@ -9,7 +9,12 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
-import com.example.floristav100.FlowerTypes.*
+import com.example.floristav100.DataModels.*
+import com.example.floristav100.DataModels.FlowerHierarchy.Flowers
+import com.example.floristav100.DataModels.FlowerHierarchy.Orchid
+import com.example.floristav100.DataModels.FlowerHierarchy.Rose
+import com.example.floristav100.DataModels.FlowerHierarchy.Sunflower
+import com.example.floristav100.DataModels.Utility.FlowerSelection
 import com.example.floristav100.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -34,7 +39,8 @@ class EditBouquetActivity : AppCompatActivity (){
          ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! +"/Available Bouquets")
 
         // Creates a flower selection manager with the starting values as the ones of the bouquet
-        flowerSelectionManager = FlowerSelection(bouquetReceived)
+        flowerSelectionManager =
+            FlowerSelection(bouquetReceived)
 
         // Gets the toolbar tiltle to be the same as the selected bouquet
         getSupportActionBar()!!.setTitle(bouquetReceived.name)
@@ -100,9 +106,13 @@ class EditBouquetActivity : AppCompatActivity (){
         //creates temporary flower list for custom bouquet creation
         var flowerListForCustomBouquet : MutableList<Flowers> = ArrayList<Flowers>()
 
-        for(x in 1..flowerSelectionManager.numberSunflowerSelected) flowerListForCustomBouquet.add(Sunflower())
+        for(x in 1..flowerSelectionManager.numberSunflowerSelected) flowerListForCustomBouquet.add(
+            Sunflower()
+        )
         for(x in 1..flowerSelectionManager.numberRoseSelected) flowerListForCustomBouquet.add(Rose())
-        for(x in 1..flowerSelectionManager.numberOrchidSelected) flowerListForCustomBouquet.add(Orchid())
+        for(x in 1..flowerSelectionManager.numberOrchidSelected) flowerListForCustomBouquet.add(
+            Orchid()
+        )
 
 
 

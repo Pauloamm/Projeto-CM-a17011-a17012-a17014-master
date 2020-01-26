@@ -1,4 +1,4 @@
-package com.example.floristav100.Menus
+package com.example.floristav100.BouquetManagement
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -12,7 +12,12 @@ import android.view.ViewGroup
 import android.widget.*
 import com.example.floristav100.AccountSettingsAndInfo.AccountSettingsActivity
 import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
-import com.example.floristav100.FlowerTypes.*
+import com.example.floristav100.DataModels.*
+import com.example.floristav100.DataModels.FlowerHierarchy.Flowers
+import com.example.floristav100.DataModels.FlowerHierarchy.Orchid
+import com.example.floristav100.DataModels.FlowerHierarchy.Rose
+import com.example.floristav100.DataModels.FlowerHierarchy.Sunflower
+import com.example.floristav100.Payment.CheckoutActivity
 import com.example.floristav100.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*

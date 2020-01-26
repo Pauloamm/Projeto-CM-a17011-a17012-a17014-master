@@ -49,6 +49,8 @@ class MainMenuActivity : AppCompatActivity() {
 
         createCustomBouquetButtonView.setOnClickListener{
 
+            var intent = Intent(this, CreateCustomBouquetActivity::class.java)
+            startActivity(intent)
         }
 
         transactionHistoryButtonView.setOnClickListener{

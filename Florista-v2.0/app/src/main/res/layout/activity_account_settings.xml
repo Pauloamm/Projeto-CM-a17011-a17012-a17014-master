@@ -9,14 +9,14 @@
 
     <ImageView
         android:id="@+id/avatarImageView"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
+        android:layout_width="97dp"
+        android:layout_height="97dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="start|right"
         android:layout_marginStart="22dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="49dp"
+        android:layout_marginTop="25dp"
         android:src="@drawable/default_image" />
 
     <ImageView
@@ -25,10 +25,23 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="start|right"
-        android:layout_marginStart="163dp"
+        android:layout_marginStart="138dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="43dp"
         android:src="@drawable/username_icon" />
+
+    <TextView
+        android:id="@+id/usernameTextViewSettings"
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="6dp"
+        android:text="TextView"
+        android:textColor="@android:color/white" />
 
     <ImageView
         android:layout_width="18dp"
@@ -36,9 +49,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="start|right"
-        android:layout_marginStart="163dp"
+        android:layout_marginStart="138dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="67dp"
         android:src="@drawable/email_icon" />
 
     <ImageView
@@ -47,105 +60,63 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="start|right"
-        android:layout_marginStart="163dp"
+        android:layout_marginStart="138dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="129dp"
+        android:layout_marginTop="92dp"
         android:src="@drawable/internet_icon" />
 
-
     <TextView
-        android:id="@+id/usernameTextViewSettings"
-        android:layout_width="226dp"
+        android:id="@+id/internetTextView"
+        android:layout_width="244dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="185dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="6dp"
         android:text="TextView"
         android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/emailTextViewSettings"
-        android:layout_width="224dp"
+        android:layout_width="244dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="186dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="1dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginEnd="6dp"
         android:text="TextView"
         android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/internetTextView"
-        android:layout_width="223dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="186dp"
-        android:layout_marginTop="129dp"
-        android:layout_marginEnd="2dp"
-        android:text="TextView"
-        android:textColor="@android:color/white" />
-
-
-
-
-
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent">
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/currentEmailView"
-            android:layout_width="321dp"
-            android:layout_height="69dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="44dp"
-            android:background="@drawable/username"
-            android:gravity="center"
-            android:hint="Current Email"
-            android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/newEmailView"
+        android:id="@+id/currentEmailView"
         android:layout_width="321dp"
         android:layout_height="69dp"
+        android:layout_below="@+id/avatarImageView"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="center"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="271dp"
+        android:layout_marginTop="27dp"
         android:layout_marginEnd="44dp"
         android:background="@drawable/username"
         android:gravity="center"
-        android:hint="New Email"
+        android:hint="Current Email"
         android:inputType="textEmailAddress" />
 
     <ImageButton
         android:id="@+id/NewEmailButtonView"
         android:layout_width="321dp"
         android:layout_height="69dp"
+        android:layout_below="@+id/newEmailView"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="341dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="44dp"
         android:background="@drawable/change_email_address_button"
         android:text="Button" />
@@ -154,53 +125,64 @@
         android:id="@+id/newPasswordView"
         android:layout_width="321dp"
         android:layout_height="69dp"
+        android:layout_below="@+id/NewEmailButtonView"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="center"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="411dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="44dp"
         android:background="@drawable/password"
         android:gravity="center"
         android:hint="Password"
         android:inputType="textPassword" />
 
-
     <EditText
         android:id="@+id/confirmNewPasswordView"
         android:layout_width="321dp"
         android:layout_height="69dp"
+        android:layout_below="@+id/newPasswordView"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="center"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="481dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="44dp"
         android:background="@drawable/password"
         android:gravity="center"
         android:hint="Confirm Password"
         android:inputType="textPassword" />
 
-        <ImageButton
 
-            android:id="@+id/NewPasswordButtonView"
-            android:layout_width="321dp"
-            android:layout_height="69dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="552dp"
-            android:layout_marginEnd="44dp"
-            android:background="@drawable/change_password_button"
-            android:text="Button" />
+    <ImageButton
 
+        android:id="@+id/NewPasswordButtonView"
+        android:layout_width="321dp"
+        android:layout_height="69dp"
+        android:layout_below="@+id/confirmNewPasswordView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/change_password_button"
+        android:text="Button" />
 
-
-        </RelativeLayout>
-</ScrollView>
+    <EditText
+        android:id="@+id/newEmailView"
+        android:layout_width="321dp"
+        android:layout_height="69dp"
+        android:layout_below="@+id/currentEmailView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/username"
+        android:gravity="center"
+        android:hint="New Email"
+        android:inputType="textEmailAddress" />
 
     <ImageButton
         android:id="@+id/DeleteAccountButtonView"

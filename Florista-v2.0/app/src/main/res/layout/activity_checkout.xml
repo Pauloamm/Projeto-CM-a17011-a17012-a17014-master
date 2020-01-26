@@ -1,20 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/default_background">
 
-    <Button
+    <ImageView
+        android:layout_width="179dp"
+        android:layout_height="63dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/checkout_image" />
+
+    <ImageButton
         android:id="@+id/paypalButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Paypal"
-        android:visibility="visible"
-        tools:text="Paypal" />
+        android:layout_width="391dp"
+        android:layout_height="82dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="-2dp"
+        android:background="@drawable/list_checkout_paypal_button" />
 
     <ListView
         android:id="@+id/checkoutListView"
-        android:layout_width="match_parent"
-        android:layout_height="642dp" />
+        android:layout_width="366dp"
+        android:layout_height="529dp"
+        android:layout_above="@+id/paypalButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="78dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp">
 
-</LinearLayout>
+    </ListView>
+
+    <TextView
+        android:id="@+id/paypalAmountCheckout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="15dp"
+        android:text="TextView"
+        android:textColor="@android:color/white"
+        android:textSize="28dp" />
+
+
+</RelativeLayout>

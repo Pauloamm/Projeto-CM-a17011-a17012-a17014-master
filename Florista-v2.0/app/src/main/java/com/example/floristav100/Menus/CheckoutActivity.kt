@@ -41,7 +41,7 @@ class CheckoutActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
 
-
+        supportActionBar!!.hide()
 
         // Gets the number of selected bouquets
         var checkedBouquetCounter = intent.getIntExtra("BouquetCounter",0)
@@ -65,7 +65,7 @@ class CheckoutActivity : AppCompatActivity(){
             priceToPay += b.totalPrice
 
         }
-        paypalButton.text = "PayPal: " + priceToPay + "€"
+        paypalAmountCheckout.text = "" + priceToPay + "€"
 
 
         config = PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(
@@ -118,7 +118,7 @@ class CheckoutActivity : AppCompatActivity(){
 
         priceToPay -= valueToRemove
         priceToPay += valueToAdd
-        paypalButton.text = "PayPal: " + priceToPay + "€"
+        paypalAmountCheckout.text = "" + priceToPay + "€"
 
 
 
@@ -144,8 +144,8 @@ class CheckoutActivity : AppCompatActivity(){
 
 
             // Gets adding and removing flowers buttons
-            var minusButtonView = v.findViewById<Button>(R.id.checkoutMinusButton) as Button
-            var plusButtonView = v.findViewById<Button>(R.id.checkoutPlusButton) as Button
+            var minusButtonView = v.findViewById<Button>(R.id.checkoutMinusButton) as ImageButton
+            var plusButtonView = v.findViewById<Button>(R.id.checkoutPlusButton) as ImageButton
 
 
             // Gets current flower type number
@@ -156,7 +156,7 @@ class CheckoutActivity : AppCompatActivity(){
 
             var bouquetPriceView = v.findViewById<TextView>(R.id.checkoutBouquetPrice)
             var totalPriceOfCurrentBouquetQuantity = currentNumber *  currentBouquet.totalPrice
-            bouquetPriceView.text = totalPriceOfCurrentBouquetQuantity.toString()
+            bouquetPriceView.text = "Price: " + totalPriceOfCurrentBouquetQuantity.toString() + "€"
 
 
 
@@ -180,7 +180,7 @@ class CheckoutActivity : AppCompatActivity(){
                 currentNumber--
 
                 var totalPriceOfCurrentBouquetQuantity = currentNumber *  currentBouquet.totalPrice
-                bouquetPriceView.text = totalPriceOfCurrentBouquetQuantity.toString()
+                bouquetPriceView.text = "Price: " +  totalPriceOfCurrentBouquetQuantity.toString() + "€"
 
                 totalPriceUpdate(valueToRemove,totalPriceOfCurrentBouquetQuantity)
 
@@ -196,7 +196,7 @@ class CheckoutActivity : AppCompatActivity(){
                 currentNumber++
 
                 var totalPriceOfCurrentBouquetQuantity = currentNumber *  currentBouquet.totalPrice
-                bouquetPriceView.text = totalPriceOfCurrentBouquetQuantity.toString()
+                bouquetPriceView.text = "Price: " + totalPriceOfCurrentBouquetQuantity.toString() + "€"
 
                 totalPriceUpdate(valueToRemove,totalPriceOfCurrentBouquetQuantity)
 

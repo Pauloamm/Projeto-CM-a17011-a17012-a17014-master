@@ -31,7 +31,7 @@ class AvailableBouquetsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //setSupportActionBar(toolbar)
+        supportActionBar!!.hide()
 
 
         // Gets reference from correspondent node in Firebase of Bouquet storage
@@ -51,7 +51,7 @@ class AvailableBouquetsActivity : AppCompatActivity() {
         readingFirebaseData()
 
         // Calls and manages result from CreateCustomBouquetActivity
-        addNewBouquetManager()
+        //addNewBouquetManager()
 
         // Manages the button for the CheckoutActivity
         checkoutManager()
@@ -270,13 +270,13 @@ class AvailableBouquetsActivity : AppCompatActivity() {
    // Manages the button for the CreateCustomBouquetActivity
     private fun addNewBouquetManager(){
 
-        addNewBouquet.setOnClickListener {
+        //addNewBouquet.setOnClickListener {
 
-            val intent = Intent(this@AvailableBouquetsActivity, CreateCustomBouquetActivity::class.java)
+           // val intent = Intent(this@AvailableBouquetsActivity, CreateCustomBouquetActivity::class.java)
 
-            startActivity(intent)
+           // startActivity(intent)
 
-        }
+        //}
 
     }
 
@@ -381,7 +381,7 @@ class AvailableBouquetsActivity : AppCompatActivity() {
             currentBouquet.UpdateCheck(checkView)
 
             var priceView = v.findViewById<TextView>(R.id.bouquetPriceView)
-            priceView.text = currentBouquet.totalPrice.toString()
+            priceView.text = "Preço: " + currentBouquet.totalPrice.toString() + "€"
 
             var checkBox = v.findViewById<CheckBox>(R.id.checkBuyView)
             checkBox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener {

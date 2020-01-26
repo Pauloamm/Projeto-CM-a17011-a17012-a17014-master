@@ -25,7 +25,7 @@ class CreateCustomBouquetActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_custom_bouquet)
-        getSupportActionBar()!!.setTitle("D.Lurdes");
+        supportActionBar!!.hide()
 
         // Gets reference from correspondent node in firebase of Bouquet storage
         ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! +"/Available Bouquets")
@@ -53,28 +53,28 @@ class CreateCustomBouquetActivity : AppCompatActivity() {
 
 
             // If there were flowers selected
-           if(customBouquet.numberOfFlowers!! > 0){
+            if(customBouquet.numberOfFlowers!! > 0){
 
-               // Gets new id in the Firebase for the new created bouquet
-               val bouquetId = ref.push().key
-               customBouquet.id = bouquetId
+                // Gets new id in the Firebase for the new created bouquet
+                val bouquetId = ref.push().key
+                customBouquet.id = bouquetId
 
-               // Adds the new bouquet to the Firebase
-               ref.child(bouquetId!!).setValue(customBouquet).addOnCompleteListener{
+                // Adds the new bouquet to the Firebase
+                ref.child(bouquetId!!).setValue(customBouquet).addOnCompleteListener{
 
-                   // Makes pop up message confirming the save
-                   Toast.makeText(this,"Bouquet Saved!", Toast.LENGTH_LONG).show()
+                    // Makes pop up message confirming the save
+                    Toast.makeText(this,"Bouquet Saved!", Toast.LENGTH_LONG).show()
 
-               }
+                }
 
 
-           }
+            }
             else{
 
-               // Makes pop up message telling there weren't flowers selected so the bouquet was not saved
-               Toast.makeText(this,"No Flowers Selected\nBouquet Not Saved!", Toast.LENGTH_LONG).show()
+                // Makes pop up message telling there weren't flowers selected so the bouquet was not saved
+                Toast.makeText(this,"No Flowers Selected\nBouquet Not Saved!", Toast.LENGTH_LONG).show()
 
-           }
+            }
 
 
             // Closes current activity and return to main activity
@@ -107,7 +107,7 @@ class CreateCustomBouquetActivity : AppCompatActivity() {
 
     private fun imageChoosing() : Int{
 
-         var selectedImageforShow : Int
+        var selectedImageforShow : Int
 
 
         // Priority list in case its equal number-> Venus - BloodyMary - Shooting Star
@@ -202,27 +202,27 @@ class CreateCustomBouquetActivity : AppCompatActivity() {
 
 
 
-       private fun currentFlowerTypeNumberStoring (currentNumber : Int, currentFlower : Flowers) {
+        private fun currentFlowerTypeNumberStoring (currentNumber : Int, currentFlower : Flowers) {
 
 
-           when(currentFlower){
+            when(currentFlower){
 
-               is Sunflower -> {
+                is Sunflower -> {
 
-                   flowerSelectionManager.numberSunflowerSelected = currentNumber
+                    flowerSelectionManager.numberSunflowerSelected = currentNumber
 
-               }
-               is Rose ->{
+                }
+                is Rose ->{
 
-                   flowerSelectionManager.numberRoseSelected = currentNumber
-               }
-               is Orchid ->{
+                    flowerSelectionManager.numberRoseSelected = currentNumber
+                }
+                is Orchid ->{
 
-                   flowerSelectionManager.numberOrchidSelected = currentNumber
-               }
+                    flowerSelectionManager.numberOrchidSelected = currentNumber
+                }
 
 
-           }
+            }
 
 
             /*currentFlowerTypeNumberSelection += increase

@@ -25,6 +25,8 @@ class EditBouquetActivity : AppCompatActivity (){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_activity)
 
+        supportActionBar!!.hide()
+
         // Gets bouquet selected
         var bouquetReceived = intent.getSerializableExtra("CurrentBouquet") as Bouquets
 

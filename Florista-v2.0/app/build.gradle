@@ -39,4 +39,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'androidx.mediarouter:mediarouter:1.1.0'
     compile 'com.paypal.sdk:paypal-android-sdk:2.14.2'
+
+    implementation 'com.github.bloder:magic:1.1'
+
 }

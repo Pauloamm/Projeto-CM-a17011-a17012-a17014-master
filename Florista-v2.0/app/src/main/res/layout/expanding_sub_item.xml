@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) 2016, Diego Bezerra <diego.bezerra@gmail.com>
+    Permission to use, copy, modify, and/or distribute this software for any purpose
+    with or without fee is hereby granted, provided that the above copyright notice
+    and this permission notice appear in all copies.
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+    FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT,
+    OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE,
+    DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS
+    ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="160dp"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/list_checkout_background"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/sub_titleTextView"
+        android:layout_width="202dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="124dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/muli"
+        android:gravity="center_vertical"
+        android:text="Shooting Stars"
+
+        android:textColor="#515151"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/sub_descriptionTextView"
+        android:layout_width="167dp"
+        android:layout_height="67dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="127dp"
+        android:layout_marginTop="37dp"
+        android:fontFamily="@font/muli"
+
+        android:text="x1 fawdaw"
+
+        android:textColor="#515151"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/sub_bouquetCounterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="35dp"
+        android:fontFamily="@font/muli"
+        android:text="x2"
+        android:textColor="#515151"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/sub_currentBouquetTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="51dp"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="79dp"
+        android:fontFamily="@font/muli"
+        android:text="Price: 500€"
+        android:textColor="#515151"
+        android:textSize="22sp" />
+
+    <ImageView
+        android:id="@+id/sub_currentBouquetImageView"
+        android:layout_width="81dp"
+        android:layout_height="81dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="14dp"
+        tools:srcCompat="@tools:sample/avatars[0]" />
+
+
+</RelativeLayout>

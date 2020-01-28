@@ -19,7 +19,7 @@
         <activity android:name=".LoginAndAccountManagement.ResetPasswordActivity"></activity>
         <activity android:name=".Menus.MainMenuActivity"></activity>
         <activity android:name=".Menus.HistoryActivity"></activity>
-        <activity android:name=".testing"></activity>
+        <activity android:name=".Menus.HistoryTransactionActivity"></activity>
 
 
 

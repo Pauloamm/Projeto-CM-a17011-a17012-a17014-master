@@ -1,6 +1,7 @@
 package com.example.floristav100.DataModels
 
-class Transaction {
+
+class Transaction  {
 
     var totalPrice : Int = 0
 
@@ -16,4 +17,5 @@ class Transaction {
        this.totalPrice = totalPrice
     }
 
+    constructor()
 }

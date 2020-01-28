@@ -40,6 +40,7 @@ dependencies {
     implementation 'androidx.mediarouter:mediarouter:1.1.0'
     compile 'com.paypal.sdk:paypal-android-sdk:2.14.2'
 
-    implementation 'com.github.bloder:magic:1.1'
+    compile 'com.diegodobelo.expandingview:expanding-view:0.9.4'
+    compile 'com.google.android.material:material:1.2.0-alpha01'
 
 }

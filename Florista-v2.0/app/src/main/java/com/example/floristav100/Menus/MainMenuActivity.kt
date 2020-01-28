@@ -1,18 +1,24 @@
 package com.example.floristav100.Menus
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.example.floristav100.AccountSettingsAndInfo.AccountSettingsActivity
 import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
 import com.example.floristav100.BouquetManagement.AvailableBouquetsActivity
 import com.example.floristav100.BouquetManagement.CreateCustomBouquetActivity
+import com.example.floristav100.DataModels.Bouquets
 import com.example.floristav100.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_menu.*
 import kotlinx.android.synthetic.main.dialog_password_check.view.*
 
@@ -20,6 +26,7 @@ class MainMenuActivity : AppCompatActivity() {
 
 
     private lateinit var ref : FirebaseAuth
+    private lateinit var refToUpdateImage : DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +36,13 @@ class MainMenuActivity : AppCompatActivity() {
         supportActionBar!!.hide()
 
         ref = FirebaseAuth.getInstance()
+        refToUpdateImage = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! + "/otêpai")
+
+
+
+       //updateImage()
+
+
 
 
         usernameTextView.text = ref.currentUser!!.displayName
@@ -110,7 +124,7 @@ class MainMenuActivity : AppCompatActivity() {
             ref.signInWithEmailAndPassword(ref.currentUser!!.email.toString(), dialogView.dialogPasswordView.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        startActivityForResult(Intent(this, AccountSettingsActivity::class.java), 2)
+                        startActivityForResult(Intent(this, AccountSettingsActivity::class.java), 1)
                     }
                     else
                     {
@@ -123,5 +137,22 @@ class MainMenuActivity : AppCompatActivity() {
 
         }
         //--------------------------------
+    }
+
+
+    private fun updateImage(){
+
+       mainAvatarImageView.setImageURI(ref.currentUser!!.photoUrl)
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK && requestCode == 1)
+        {
+            updateImage()
+
+        }
     }
 }

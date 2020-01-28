@@ -4,10 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.example.floristav100.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_account_settings.*
@@ -29,6 +32,10 @@ class AccountSettingsActivity : AppCompatActivity() {
         refForDelete = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
 
 
+
+        avatarImageView.setImageURI(ref.currentUser!!.photoUrl)
+        
+
         usernameTextViewSettings.text = ref.currentUser!!.displayName
         emailTextViewSettings.text = ref.currentUser!!.email
 
@@ -46,7 +53,79 @@ class AccountSettingsActivity : AppCompatActivity() {
             deleteAccount()
         }
 
+        avatarImageButton.setOnClickListener{
+            pickImageFromGallery()
+        }
+
     }
+
+
+    fun profileImageSettings(){
+
+
+       // var refToUploadImage = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
+
+       // var image : Int = 0
+
+        //refToUploadImage.setValue(image)
+
+
+
+
+    }
+
+
+    private fun pickImageFromGallery(){
+
+       val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), 3)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 3 && resultCode == Activity.RESULT_OK)
+        {
+
+           // var imageViewBouquet = findViewById<ImageView>(R.id.avatarImageView) as ImageView
+           // imageViewBouquet.setImageURI(data!!.data)
+
+
+           // var refToUploadImage = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! + "/otêpai")
+           // refToUploadImage.setValue()
+
+           var intent = Intent()
+           setResult(Activity.RESULT_OK, intent)
+
+
+            val profileUpdates = UserProfileChangeRequest.Builder()
+                .setDisplayName("FIlho da puta")
+                .setPhotoUri((data!!.data))
+                .build()
+
+            ref.currentUser!!.updateProfile(profileUpdates)
+                ?.addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        Toast.makeText(baseContext, "FUNCIONA CARALHO", Toast.LENGTH_SHORT).show()
+
+                        var imageViewEdit = findViewById<ImageView>(R.id.avatarImageView) as ImageView
+                        imageViewEdit.setImageURI(ref.currentUser!!.photoUrl)
+                    }
+
+                }
+
+
+
+        }
+    }
+
+
+
+
+
+
 
     fun deleteAccount(){
         // Removes the Account

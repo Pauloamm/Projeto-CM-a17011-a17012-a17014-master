@@ -19,6 +19,7 @@
         android:layout_marginTop="25dp"
         android:src="@drawable/default_image" />
 
+
     <ImageView
         android:layout_width="18dp"
         android:layout_height="18dp"
@@ -195,6 +196,16 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="-2dp"
         android:background="@drawable/delete_account_button"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/avatarImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="33dp"
         android:text="Button" />
 
 </RelativeLayout>

@@ -20,7 +20,10 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="22dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="42dp" />
+        android:layout_marginBottom="42dp">
+
+    </com.diegodobelo.expandingview.ExpandingList>
+
 
     <ImageView
         android:id="@+id/imageView4"
@@ -33,6 +36,23 @@
         android:layout_marginTop="-5dp"
         android:layout_marginEnd="44dp"
         app:srcCompat="@drawable/transaction_history_name" />
+
+    <ImageView
+        android:id="@+id/bonus"
+        android:layout_width="348dp"
+        android:layout_height="506dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="117dp"
+
+        android:visibility="visible"
+
+        app:srcCompat="@drawable/transaction_history_bonus" />
 
 
 </RelativeLayout>

@@ -11,6 +11,7 @@ import com.example.floristav100.DataModels.Bouquets
 import com.example.floristav100.DataModels.Transaction
 import com.example.floristav100.R
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_history_transaction.*
 import kotlinx.android.synthetic.main.expanding_item.*
 import kotlinx.android.synthetic.main.expanding_item.view.*
 import kotlinx.android.synthetic.main.expanding_sub_item.*
@@ -29,6 +30,8 @@ class HistoryTransactionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
 
+
+        setContentView(R.layout.activity_history_transaction)
 
 
 
@@ -73,8 +76,8 @@ class HistoryTransactionActivity : AppCompatActivity() {
                 }
 
 
-                if (transactionList.size != 0) setContentView(R.layout.activity_history_transaction)
-                else setContentView(R.layout.activity_history_transaction_bonus)
+                if (transactionList.size == 0) bonus.visibility = View.VISIBLE
+                else bonus.visibility = View.INVISIBLE
             }
 
         })

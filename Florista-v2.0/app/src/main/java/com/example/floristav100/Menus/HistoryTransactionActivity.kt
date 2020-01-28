@@ -11,7 +11,10 @@ import com.example.floristav100.DataModels.Bouquets
 import com.example.floristav100.DataModels.Transaction
 import com.example.floristav100.R
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.expanding_item.*
+import kotlinx.android.synthetic.main.expanding_item.view.*
 import kotlinx.android.synthetic.main.expanding_sub_item.*
+import kotlinx.android.synthetic.main.expanding_sub_item.view.*
 
 
 class HistoryTransactionActivity : AppCompatActivity() {
@@ -26,7 +29,8 @@ class HistoryTransactionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
 
-        setContentView(R.layout.activity_history_transaction)
+
+
 
         ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! + "/Transaction History")
 
@@ -34,7 +38,6 @@ class HistoryTransactionActivity : AppCompatActivity() {
 
         readingDataFirebase()
 
-        createItems()
 
     }
 
@@ -42,12 +45,15 @@ class HistoryTransactionActivity : AppCompatActivity() {
 
     fun readingDataFirebase(){
 
+
         ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
+
             override fun onDataChange(p0: DataSnapshot) {
+
                 if(p0.exists()){
 
                     for (h in p0.children){
@@ -59,40 +65,44 @@ class HistoryTransactionActivity : AppCompatActivity() {
 
                         transactionList.add(transactionInCurrentNode!!)
 
-
+                        addItem(transactionInCurrentNode)
                     }
 
                     // Updates listView
                     // bouquetListView.adapter = BouquetAdapter()
                 }
 
+
+                if (transactionList.size != 0) setContentView(R.layout.activity_history_transaction)
+                else setContentView(R.layout.activity_history_transaction_bonus)
             }
 
         })
     }
 
 
-    private fun createItems() {
 
 
-        for(putaquepariuestamerda in transactionList)
-        {
-            addItem(putaquepariuestamerda.totalPrice, putaquepariuestamerda.quantitiesList, putaquepariuestamerda.bouquetsBoughtList )
-        }
-
-    }
-
-    private fun addItem(totalPrice: Int, quantitiesList : MutableList<Int>, bouquetsBought: MutableList<Bouquets>) {
+    private fun addItem(currentTransaction : Transaction) {
         //Let's create an item with R.layout.expanding_layout
         val item = mExpandingList!!.createNewItem(R.layout.expanding_layout)
 
         //If item creation is successful, let's configure it
         if (item != null) {
             //It is possible to get any view inside the inflated layout. Let's set the text in the item
-            (item.findViewById(R.id.titleTextView) as TextView).text = totalPrice.toString()
+
+            // Total Price
+            item.titleTextView.text = "Total Price: " + currentTransaction.totalPrice.toString() + "€"
+            item.descriptionTextView.text = "Total Bouquets: " + currentTransaction.totalBouquets.toString()
+
+
+
+            item.dateTextView.text = currentTransaction.currentDateString
+            item.timeTextView.text = currentTransaction.currentTimeString
+
 
             //We can create items in batch.
-            item.createSubItems(bouquetsBought.size)
+            item.createSubItems(currentTransaction.bouquetsBoughtList.size)
             for (i in 0 until item.subItemsCount) {
                 //Let's get the created sub item by its index
                 val view = item.getSubItemView(i)
@@ -101,7 +111,7 @@ class HistoryTransactionActivity : AppCompatActivity() {
 
 
                 //Let's set some values in
-                configureSubItem(view, bouquetsBought[i], quantitiesList[i])
+                configureSubItem(view, currentTransaction.bouquetsBoughtList[i], currentTransaction.quantitiesList[i])
             }
 
 
@@ -111,7 +121,7 @@ class HistoryTransactionActivity : AppCompatActivity() {
 
     private fun configureSubItem(view: View, currentBouquet: Bouquets, currentBoquetQuantity : Int) {
 
-        sub_titleTextView.text = currentBouquet.name
+        view.sub_titleTextView.text = currentBouquet.name
 
 
         //sets up flower count info on screen
@@ -121,14 +131,14 @@ class HistoryTransactionActivity : AppCompatActivity() {
                     "x" + currentBouquet.orchidCounter.toString() + " Orchids\n" +
                     "Total: " +currentBouquet.numberOfFlowers.toString()
 
-        sub_descriptionTextView.text = flowersNumbers
+        view.sub_descriptionTextView.text = flowersNumbers
 
-        sub_bouquetCounterTextView.text = "x" + currentBoquetQuantity.toString()
+        view.sub_bouquetCounterTextView.text = "x" + currentBoquetQuantity.toString()
 
 
-        sub_currentBouquetTotalPrice.text = "Price: " + currentBouquet.totalPrice * currentBoquetQuantity
+        view.sub_currentBouquetTotalPrice.text = "Price: " + currentBouquet.totalPrice * currentBoquetQuantity + "€"
 
-        sub_currentBouquetImageView.setImageResource(currentBouquet.image!!)
+        view.sub_currentBouquetImageView.setImageResource(currentBouquet.image!!)
     }
 
 

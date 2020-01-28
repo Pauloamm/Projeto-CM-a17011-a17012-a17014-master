@@ -6,10 +6,13 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.floristav100.AccountSettingsAndInfo.AccountSettingsActivity
+import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
 import com.example.floristav100.BouquetManagement.AvailableBouquetsActivity
 import com.example.floristav100.BouquetManagement.CreateCustomBouquetActivity
 import com.example.floristav100.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main_menu.*
 import kotlinx.android.synthetic.main.dialog_password_check.view.*
 
@@ -56,6 +59,7 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
         transactionHistoryButtonView.setOnClickListener{
+
 
             var intent = Intent (this, HistoryTransactionActivity::class.java)
             startActivity(intent)

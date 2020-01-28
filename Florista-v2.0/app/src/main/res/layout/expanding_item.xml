@@ -19,38 +19,38 @@
 
 
     <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="274dp"
-        android:layout_height="32dp"
-        android:layout_below="@+id/dateTextView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="115dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="22dp"
-        android:fontFamily="@font/muli"
-        android:gravity="start|center_vertical"
-        android:text="Total Price: 1000€"
-        android:textColor="#515151"
-        android:textSize="22sp"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/descriptionTextView"
-        android:layout_width="216dp"
+        android:layout_width="268dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleTextView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="120dp"
+        android:layout_marginStart="114dp"
         android:layout_marginTop="3dp"
-        android:layout_marginEnd="75dp"
+        android:layout_marginEnd="29dp"
         android:fontFamily="@font/muli"
         android:gravity="start"
         android:text="Total Bouquets: 3"
         android:textColor="#515151"
         android:textSize="17sp"
         android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="274dp"
+        android:layout_height="32dp"
+        android:layout_below="@+id/dateTextView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="28dp"
+        android:fontFamily="@font/muli"
+        android:gravity="start|center_vertical"
+        android:text="Total Price: 1000€"
+        android:textColor="#515151"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/timeTextView"

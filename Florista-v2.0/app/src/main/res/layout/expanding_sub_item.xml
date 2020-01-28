@@ -38,7 +38,7 @@
 
     <TextView
         android:id="@+id/sub_descriptionTextView"
-        android:layout_width="137dp"
+        android:layout_width="167dp"
         android:layout_height="67dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -77,7 +77,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="51dp"
         android:layout_marginLeft="51dp"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="104dp"
         android:layout_marginEnd="79dp"
         android:fontFamily="@font/muli"
         android:text="Price: 500€"

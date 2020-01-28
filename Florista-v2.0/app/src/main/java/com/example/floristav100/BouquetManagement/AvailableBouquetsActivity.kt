@@ -386,7 +386,7 @@ class AvailableBouquetsActivity : AppCompatActivity() {
             currentBouquet.UpdateCheck(checkView)
 
             var priceView = v.findViewById<TextView>(R.id.bouquetPriceView)
-            priceView.text = "Preço: " + currentBouquet.totalPrice.toString() + "€"
+            priceView.text = "Price: " + currentBouquet.totalPrice.toString() + "€"
 
             var checkBox = v.findViewById<CheckBox>(R.id.checkBuyView)
             checkBox.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener {

@@ -76,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
         if (currentUser != null)
             emailView.text = Editable.Factory.getInstance().newEditable(currentUser.email)
 
-        updateUI(currentUser)
+        //updateUI(currentUser)
     }
 
     private fun updateUI(currentUser : FirebaseUser?){

@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import com.bumptech.glide.Glide
 import com.example.floristav100.AccountSettingsAndInfo.AccountSettingsActivity
 import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
 import com.example.floristav100.BouquetManagement.AvailableBouquetsActivity
@@ -18,6 +19,7 @@ import com.example.floristav100.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_account_settings.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_menu.*
 import kotlinx.android.synthetic.main.dialog_password_check.view.*
@@ -40,7 +42,12 @@ class MainMenuActivity : AppCompatActivity() {
 
 
 
-       //updateImage()
+        Glide.with(this)
+            .load(ref.currentUser!!.photoUrl)
+            .into(mainAvatarImageView)
+
+        usernameTextView.text = ref.currentUser!!.displayName
+        emailTextView.text = ref.currentUser!!.email
 
 
 
@@ -140,18 +147,30 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
 
-    private fun updateImage(){
 
-       mainAvatarImageView.setImageURI(ref.currentUser!!.photoUrl)
-
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        var UpdateInformation : String = data?.getStringExtra("UpdateInformation")!!
+
+
+
         if (resultCode == Activity.RESULT_OK && requestCode == 1)
         {
-            updateImage()
+            when (UpdateInformation) {
+                "UpdateProfile" ->{
+                    Glide.with(this)
+                        .load(ref.currentUser!!.photoUrl)
+                        .into(mainAvatarImageView)
+
+                    usernameTextView.text = ref.currentUser!!.displayName
+                }
+                // Updates Email TextView
+                "UpdateEmail" -> emailTextView.text = ref.currentUser!!.email
+                // Deletes Current Account
+                "DeleteAccount" -> finish()
+            }
 
         }
     }

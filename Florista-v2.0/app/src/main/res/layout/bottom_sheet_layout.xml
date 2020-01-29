@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:background="@android:color/white"
+    app:layout_behavior="com.google.android.material.BottomSheet">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:id="@+id/cameraId"
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="16dp"
+        android:layout_gravity="center_vertical"
+        android:background="?attr/selectableItemBackground">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_camera_alt_black_24dp"
+            android:tint="#797979"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Camera"
+            android:textColor="#797979"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:id="@+id/galleryId"
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="16dp"
+        android:layout_gravity="center_vertical"
+        android:background="?attr/selectableItemBackground">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_collections_black_24dp"
+            android:tint="#797979"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Gallery"
+            android:textColor="#797979"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

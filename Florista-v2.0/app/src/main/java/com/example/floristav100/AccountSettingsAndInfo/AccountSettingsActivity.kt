@@ -4,68 +4,102 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.util.Patterns
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
-import com.bumptech.glide.Glide
+import androidx.core.graphics.drawable.toBitmap
+import com.example.floristav100.DataModels.Utility.ProfileAndImageManaging
 import com.example.floristav100.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_account_settings.*
-import kotlinx.android.synthetic.main.activity_main_menu.*
 import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
-import java.io.ByteArrayOutputStream
-import java.net.URL
 
 class AccountSettingsActivity : AppCompatActivity() {
 
-    private lateinit var ref: FirebaseAuth
+    private lateinit var refAcc: FirebaseAuth
 
-    private lateinit var  refForDelete : DatabaseReference
-    private lateinit var imageUri : Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_settings)
         supportActionBar!!.hide()
 
-        // Defaults result to cancelled 
+        // Defaults result to cancelled in case the user decides to leave the activity without choosing an action
         setResult(Activity.RESULT_CANCELED)
 
-        ref = FirebaseAuth.getInstance()
+        // Reference to Firebase Auth current user
+        refAcc = FirebaseAuth.getInstance()
 
-        refForDelete = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
+        // Sets up initial view (imageView and textViews)
+        viewSetup()
 
+        // Manages clicks of buttons
+        buttonManager()
 
-
-
-        // PARA POR A PUTA DA PHOTOURL NA IMAGEM
-        Glide.with(this)
-            .load(ref.currentUser!!.photoUrl)
-            .into(avatarImageView)
-
-
-        usernameTextViewSettings.text = Editable.Factory.getInstance().newEditable(ref.currentUser!!.displayName)
-        emailTextViewSettings.text = ref.currentUser!!.email
+    }
 
 
+    private fun viewSetup(){
 
+        // Updates avatar ImageView
+        ProfileAndImageManaging.updateView(avatarImageView,refAcc.currentUser!!.photoUrl!!, this)
+
+
+        // Updates TextViews/EditTextViews with profile info
+        usernameTextViewSettings.text = Editable.Factory.getInstance().newEditable(refAcc.currentUser!!.displayName)
+        emailTextViewSettings.text = refAcc.currentUser!!.email
+
+
+
+    }
+
+    private fun buttonManager(){
+
+        // Manages image clicking for changing profile picture
+        avatarImageView.setOnClickListener{
+            methodForImageChoosing()
+        }
+
+        // Manages Update profile button click
+        updateProfileButtonManager()
+
+
+        // Manages new email button click
+        newEmailButtonView.setOnClickListener {
+            newEmailAccount()
+
+        }
+
+        // Manages new password button click
+        newPasswordButtonView.setOnClickListener{
+            newPasswordAccount()
+        }
+
+        // Manages delete account button click
+        deleteAccountButtonView.setOnClickListener{
+            deleteAccount()
+        }
+
+
+    }
+
+
+
+    private fun methodForImageChoosing(){
+
+        // Sets up image type choosing View
         val bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
         bottomSheetDialog.setContentView(view)
-        avatarImageView.setOnClickListener{
-            bottomSheetDialog.show()
-        }
+        bottomSheetDialog.show()
+
+        // Manages type click
         view.cameraId.setOnClickListener{
             pickImageFromCamera()
         }
@@ -74,78 +108,11 @@ class AccountSettingsActivity : AppCompatActivity() {
         }
 
 
-
-
-
-
-        NewEmailButtonView.setOnClickListener {
-            newEmailAccount()
-
-        }
-
-        NewPasswordButtonView.setOnClickListener{
-            newPasswordAccount()
-        }
-
-        DeleteAccountButtonView.setOnClickListener{
-            deleteAccount()
-        }
-
-        avatarImageButton.setOnClickListener{
-
-            var photo = when {
-                ::imageUri.isInitialized -> imageUri
-                ref.currentUser!!.photoUrl == null -> Uri.parse( "https://picsum.photos/200")
-                else -> ref.currentUser!!.photoUrl
-            }
-
-            val username = usernameTextViewSettings.text.toString()
-
-            if (username.isEmpty()){
-                usernameTextViewSettings.error = "Name Required"
-                usernameTextViewSettings.requestFocus()
-                return@setOnClickListener
-            }
-
-            val updates = UserProfileChangeRequest.Builder()
-                .setDisplayName(username)
-                .setPhotoUri(photo)
-                .build()
-
-            ref.currentUser!!.updateProfile(updates)
-                ?.addOnCompleteListener{ task ->
-                    if (task.isSuccessful){
-                        Toast.makeText(this,"funciona!", Toast.LENGTH_LONG).show()
-
-                        var intent = Intent()
-                        intent.putExtra("UpdateInformation", "UpdateProfile")
-                        setResult(Activity.RESULT_OK, intent)
-                        finish()
-
-                    } else {
-                        Toast.makeText(this, task.exception?.message!!, Toast.LENGTH_LONG).show()
-                    }
-
-                }
-        }
-
-
-
-    }
-
-
-
-
-    private fun pickImageFromGallery(){
-
-          val intent = Intent()
-           intent.type = "image/*"
-          intent.action = Intent.ACTION_GET_CONTENT
-          startActivityForResult(Intent.createChooser(intent, "Select Image"), 2)
     }
 
     private fun pickImageFromCamera(){
 
+        // Intent used for taking picture from camera to be used
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { pictureIntent ->
             pictureIntent.resolveActivity(this.packageManager!!)?.also {
                 startActivityForResult(pictureIntent, 1)
@@ -153,91 +120,65 @@ class AccountSettingsActivity : AppCompatActivity() {
         }
     }
 
+    private fun pickImageFromGallery(){
 
-
+        // Intent used for picking gallery photo
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), 2)
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        // If photo is taken from camera successfully
         if (requestCode == 1 && resultCode == Activity.RESULT_OK)
         {
 
             val imageBitmap : Bitmap = data?.extras?.get("data") as Bitmap
 
-            pocaralhoPaulo(imageBitmap)
+            ProfileAndImageManaging.updateView(avatarImageView, imageBitmap)
         }
+
+        // If photo is selected from gallery
         if(requestCode == 2 && resultCode == Activity.RESULT_OK){
 
             val inputStream = contentResolver.openInputStream(data!!.data!!)
             val imageBitmap = BitmapFactory.decodeStream(inputStream)
 
-            pocaralhoPaulo(imageBitmap)
+            ProfileAndImageManaging.updateView(avatarImageView, imageBitmap)
+
         }
     }
 
 
 
+    private fun updateProfileButtonManager(){
 
-    private fun pocaralhoPaulo(bitmap : Bitmap){
+        profileUpdateButton.setOnClickListener{
 
-        val baos = ByteArrayOutputStream()
-        val storageRef = FirebaseStorage.getInstance().
-            reference
-            .child("pics/${UserIdFirebase.UID}")
+            // Gets Username written in edit text for update profile displayName
+            var newUsername = usernameTextViewSettings.text.toString()
 
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100, baos)
-        val image = baos.toByteArray()
-
-        val upload = storageRef.putBytes(image)
-
-
-        upload.addOnCompleteListener() { uploadTask ->
-            if (uploadTask.isSuccessful){
-                storageRef.downloadUrl.addOnCompleteListener{ urlTask ->
-                    urlTask.result?.let{
-                        imageUri = it
-
-                        Toast.makeText(this,"talvez funcione!", Toast.LENGTH_LONG).show()
-
-                        avatarImageView.setImageBitmap(bitmap)
-
-
-                    }
-                }
-            }else {
-                uploadTask.exception?.let{
-                    Toast.makeText(this,"talvez nao funcione!", Toast.LENGTH_LONG).show()
-                }
+            if (newUsername.isEmpty()){
+                usernameTextViewSettings.error = "Name Required"
+                usernameTextViewSettings.requestFocus()
+                return@setOnClickListener
             }
+
+            // Only updates when written username is not empty
+            ProfileAndImageManaging.imageStorageAndProfileUpdate(avatarImageView.drawable.toBitmap(),newUsername,refAcc, this)
+            finish()
+
         }
 
 
     }
 
+    private fun newEmailAccount() {
 
-
-
-
-    fun deleteAccount(){
-        // Removes the Account
-        ref.currentUser!!.delete()
-
-        // Removes the node from the Firebase of the selected account
-        refForDelete.removeValue()
-
-        var adw = FirebaseStorage.getInstance().
-            reference
-            .child("pics/${UserIdFirebase.UID}")
-        adw.delete()
-
-        var intent = Intent()
-        intent.putExtra("UpdateInformation","DeleteAccount")
-        setResult(Activity.RESULT_OK, intent)
-        finish()
-    }
-
-
-    fun newEmailAccount() {
+        // Error management-----------------------------
         if (currentEmailView.text.toString().isEmpty()) {
             currentEmailView.error = "Please Enter the Current Email"
             currentEmailView.requestFocus()
@@ -268,24 +209,28 @@ class AccountSettingsActivity : AppCompatActivity() {
             return
         }
 
-        if (currentEmailView.text.toString() != ref.currentUser!!.email){
+        if (currentEmailView.text.toString() != refAcc.currentUser!!.email){
             currentEmailView.error = "This Account is not Associated with this Email"
             currentEmailView.requestFocus()
             return
         }
+        // Error management-----------------------------
 
 
-        ref.currentUser!!.updateEmail(newEmailView.text.toString())
+        // Updates email of current user
+        refAcc.currentUser!!.updateEmail(newEmailView.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    //
-                    ref.currentUser?.sendEmailVerification()
+
+                    // Sends email checking for the new email
+                    refAcc.currentUser?.sendEmailVerification()
                         ?.addOnCompleteListener { task ->
                             Toast.makeText(
                                 this, "Email Changed Successfully",
                                 Toast.LENGTH_SHORT
                             ).show()
 
+                            // Send intent with type of action chosen and sets RESULT_OK
                             var intent = Intent()
                             intent.putExtra("UpdateInformation", "UpdateEmail")
                             setResult(Activity.RESULT_OK, intent)
@@ -294,6 +239,7 @@ class AccountSettingsActivity : AppCompatActivity() {
                         }
 
                 } else {
+
                     // If fails, display a message to the user.
                     Toast.makeText(
                         this, "An Error Occurred",
@@ -303,9 +249,9 @@ class AccountSettingsActivity : AppCompatActivity() {
             }
     }
 
+    private fun newPasswordAccount() {
 
-    fun newPasswordAccount() {
-
+        // Error management-----------------------------
         if (newPasswordView.text.toString().isEmpty()) {
             newPasswordView.error = "Please Enter the New Password"
             newPasswordView.requestFocus()
@@ -322,18 +268,21 @@ class AccountSettingsActivity : AppCompatActivity() {
             confirmNewPasswordView.requestFocus()
             return
         }
+        // Error management-----------------------------
 
 
 
-        ref.currentUser!!.updatePassword(newPasswordView.text.toString())
+        // Updates password of current user
+        refAcc.currentUser!!.updatePassword(newPasswordView.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    //
+
 
                     Toast.makeText(
                         this, "Password Changed Successfully",
                         Toast.LENGTH_SHORT
                     ).show()
+
                     finish()
 
                 } else {
@@ -346,5 +295,25 @@ class AccountSettingsActivity : AppCompatActivity() {
             }
 
 
+    }
+
+    private fun deleteAccount(){
+
+
+
+        // Removes the node from the Firebase of the selected account
+        FirebaseDatabase.getInstance().getReference(refAcc.currentUser!!.uid).removeValue()
+
+        // Removes profile image of current account
+        FirebaseStorage.getInstance().reference.child("pics/${refAcc.currentUser!!.uid}").delete()
+
+        // Removes the Account
+        refAcc.currentUser!!.delete()
+
+        // Send intent with type of action chosen and sets RESULT_OK
+        var intent = Intent()
+        intent.putExtra("UpdateInformation","DeleteAccount")
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 }

@@ -33,7 +33,7 @@ class CreateCustomBouquetActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_custom_bouquet)
         supportActionBar!!.hide()
 
-        // Gets reference from correspondent node in firebase of Bouquet storage
+        // Gets reference from correspondent node in Firebase of Bouquet storage
         ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! +"/Available Bouquets")
 
 
@@ -110,7 +110,16 @@ class CreateCustomBouquetActivity : AppCompatActivity() {
         )
 
 
-        return  Bouquets("Custom Bouquet", flowerListForCustomBouquet, imageChoosing())
+        // Gets custom name if the user enters one, otherwise gives it a default name ("Custom Bouquet")
+        var customName = when{
+
+            customNameTextView.text.toString().isEmpty() -> "Custom Bouquet"
+            else -> customNameTextView.text.toString()
+        }
+
+
+        return  Bouquets(customName, flowerListForCustomBouquet, imageChoosing())
+
 
 
     }
@@ -234,17 +243,6 @@ class CreateCustomBouquetActivity : AppCompatActivity() {
 
             }
 
-
-            /*currentFlowerTypeNumberSelection += increase
-
-            currentFlowerTypeSelectionView.text = currentFlowerTypeNumberSelection.toString()
-
-            when(currentFlowerType){
-
-                is Rose -> numberRoseSelected = currentFlowerTypeNumberSelection
-                is Orchid -> numberOrchidSelected = currentFlowerTypeNumberSelection
-                is Sunflower -> numberSunflowerSelected = currentFlowerTypeNumberSelection
-            }*/
 
 
         }

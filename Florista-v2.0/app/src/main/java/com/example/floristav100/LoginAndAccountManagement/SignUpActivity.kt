@@ -28,7 +28,6 @@ import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var ref : FirebaseAuth
-    private  var imageUri : Uri? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -140,9 +139,10 @@ class SignUpActivity : AppCompatActivity() {
             }
     }
 
+
     private fun methodForImageChoosing(){
 
-        // Sets up confirmPasswordDialog View
+        // Sets up image type choosing View
         val bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
         bottomSheetDialog.setContentView(view)
@@ -158,7 +158,6 @@ class SignUpActivity : AppCompatActivity() {
 
 
     }
-
 
     private fun pickImageFromCamera(){
 

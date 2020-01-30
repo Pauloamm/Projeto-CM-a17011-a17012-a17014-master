@@ -51,12 +51,15 @@ object ProfileAndImageManaging  {
         val upload = storageRef.putBytes(image)
 
 
+        // Uploads image to Firebase Storage and gets its Uri to store in profile
         upload.addOnCompleteListener { uploadTask ->
             if (uploadTask.isSuccessful){
                 storageRef.downloadUrl.addOnCompleteListener{ urlTask ->
                     urlTask.result?.let{
 
                         Toast.makeText(context,"Image uploaded successfully", Toast.LENGTH_LONG).show()
+
+                        // Updates profile with new data(including image Uri)
                         updateProfile(referenceToUser,newUsername,it, context)
 
 

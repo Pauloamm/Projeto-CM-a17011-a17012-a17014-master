@@ -37,6 +37,7 @@ class HistoryTransactionActivity : AppCompatActivity() {
 
         ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! + "/Transaction History")
 
+
         mExpandingList = findViewById(R.id.expanding_list_main)
 
         readingDataFirebase()
@@ -46,7 +47,7 @@ class HistoryTransactionActivity : AppCompatActivity() {
 
 
 
-    fun readingDataFirebase(){
+    private fun readingDataFirebase(){
 
 
         ref.addValueEventListener(object : ValueEventListener {
@@ -94,7 +95,8 @@ class HistoryTransactionActivity : AppCompatActivity() {
         if (item != null) {
             //It is possible to get any view inside the inflated layout. Let's set the text in the item
 
-            // Total Price
+            // Sets up all information for viwew of transaction(principal items)
+
             item.titleTextView.text = "Total Price: " + currentTransaction.totalPrice.toString() + "€"
             item.descriptionTextView.text = "Total Bouquets: " + currentTransaction.totalBouquets.toString()
 
@@ -107,11 +109,9 @@ class HistoryTransactionActivity : AppCompatActivity() {
             //We can create items in batch.
             item.createSubItems(currentTransaction.bouquetsBoughtList.size)
             for (i in 0 until item.subItemsCount) {
+
                 //Let's get the created sub item by its index
                 val view = item.getSubItemView(i)
-
-
-
 
                 //Let's set some values in
                 configureSubItem(view, currentTransaction.bouquetsBoughtList[i], currentTransaction.quantitiesList[i])
@@ -123,6 +123,9 @@ class HistoryTransactionActivity : AppCompatActivity() {
     }
 
     private fun configureSubItem(view: View, currentBouquet: Bouquets, currentBoquetQuantity : Int) {
+
+
+        // Sets up each subItem view
 
         view.sub_titleTextView.text = currentBouquet.name
 
@@ -146,7 +149,4 @@ class HistoryTransactionActivity : AppCompatActivity() {
 
 
 
-    internal interface OnItemCreated {
-        fun itemCreated(title: String)
-    }
 }

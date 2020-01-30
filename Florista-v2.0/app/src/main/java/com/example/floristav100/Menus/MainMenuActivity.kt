@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.example.floristav100.AccountSettingsAndInfo.AccountSettingsActivity
 import com.example.floristav100.BouquetManagement.AvailableBouquetsActivity
 import com.example.floristav100.BouquetManagement.CreateCustomBouquetActivity
@@ -29,17 +28,12 @@ class MainMenuActivity : AppCompatActivity() {
         supportActionBar!!.hide()
 
 
-        // gets instance of current player for data display
+        // Gets instance of current player for data display
         ref = FirebaseAuth.getInstance()
 
 
-        // Updates avatar ImageView
-        ProfileAndImageManaging.updateView(mainAvatarImageView,ref.currentUser!!.photoUrl!!,this)
-
-        // Updates TextViews with profile info
-        usernameTextView.text = ref.currentUser!!.displayName
-        emailTextView.text = ref.currentUser!!.email
-
+        // Sets up initial view with data from profile
+        initialViewSetup()
 
 
         // Manages Edit profile button click
@@ -55,6 +49,18 @@ class MainMenuActivity : AppCompatActivity() {
 
         // Manages instagram clicks
         instagramButtonsManager()
+
+
+    }
+
+    private fun initialViewSetup(){
+
+        // Updates avatar ImageView
+        ProfileAndImageManaging.updateView(mainAvatarImageView,ref.currentUser!!.photoUrl!!,this)
+
+        // Updates TextViews with profile info
+        usernameTextView.text = ref.currentUser!!.displayName
+        emailTextView.text = ref.currentUser!!.email
 
 
     }
@@ -116,7 +122,8 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     private fun confirmPasswordDialog(){
-        //--------------------------------
+
+
         var dialog = AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK)
         val dialogView = layoutInflater.inflate(R.layout.dialog_password_check,null)
         dialog.setView(dialogView)
@@ -158,8 +165,7 @@ class MainMenuActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
 
-        // Manages result from AccountSettingsActivity
-
+        // Manages result from AccountSettingsActivity(updating views)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK  )
         {
             var updateInformationType : String = data?.getStringExtra("UpdateInformation")!!

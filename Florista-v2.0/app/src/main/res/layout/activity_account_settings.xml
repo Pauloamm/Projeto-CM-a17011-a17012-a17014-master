@@ -18,7 +18,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="25dp"
         android:src="@drawable/default_image"
-        android:background="@drawable/image_border"/>
+        />
 
 
     <ImageView
@@ -88,7 +88,7 @@
         android:inputType="textEmailAddress" />
 
     <ImageButton
-        android:id="@+id/NewEmailButtonView"
+        android:id="@+id/newEmailButtonView"
         android:layout_width="321dp"
         android:layout_height="69dp"
         android:layout_below="@+id/newEmailView"
@@ -104,7 +104,7 @@
         android:id="@+id/newPasswordView"
         android:layout_width="321dp"
         android:layout_height="69dp"
-        android:layout_below="@+id/NewEmailButtonView"
+        android:layout_below="@+id/newEmailButtonView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="center"
@@ -135,7 +135,7 @@
 
     <ImageButton
 
-        android:id="@+id/NewPasswordButtonView"
+        android:id="@+id/newPasswordButtonView"
         android:layout_width="321dp"
         android:layout_height="69dp"
         android:layout_below="@+id/confirmNewPasswordView"
@@ -164,7 +164,7 @@
         android:inputType="textEmailAddress" />
 
     <ImageButton
-        android:id="@+id/DeleteAccountButtonView"
+        android:id="@+id/deleteAccountButtonView"
         android:layout_width="391dp"
         android:layout_height="82dp"
         android:layout_alignParentStart="true"
@@ -177,7 +177,7 @@
         android:text="Button" />
 
     <Button
-        android:id="@+id/avatarImageButton"
+        android:id="@+id/profileUpdateButton"
         android:layout_width="206dp"
         android:layout_height="31dp"
         android:layout_below="@+id/emailTextViewSettings"

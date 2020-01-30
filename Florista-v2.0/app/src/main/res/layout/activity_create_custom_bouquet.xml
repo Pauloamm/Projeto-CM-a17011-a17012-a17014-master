@@ -47,8 +47,8 @@
     </ListView>
 
 
-    <TextView
-        android:id="@+id/textView"
+    <EditText
+        android:id="@+id/customNameTextView"
         android:layout_width="0dp"
         android:layout_height="69dp"
         android:layout_marginTop="8dp"

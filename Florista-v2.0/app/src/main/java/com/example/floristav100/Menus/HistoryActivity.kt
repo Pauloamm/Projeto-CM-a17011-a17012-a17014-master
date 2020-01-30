@@ -15,8 +15,11 @@ class HistoryActivity : AppCompatActivity() {
 
         supportActionBar!!.hide()
 
+
+        // Gets textView scrolling down
         historyTextView.movementMethod = ScrollingMovementMethod()
 
+        // History pre-written
         historyTextView.text = "Nascida em 1926 com óbito em 1996, Dona Lurdes era uma simples senhora da aldeia, com o típico coração alegre e simples!\n\n" +
                 "Proveniente de família pobre, esta sobreviveu colhendo e vendendo flores do quintal de seus pais, ficando conhecida na sua terra como a casamenteira dos casais novos com todo o tipo de combinações e especialidades de arranjos.\n\n" +
                 "Em idade adulta decidiu então abrir uma florista que rapidamente ganhou fama e sucesso devido ao ambiente acolhedor e simples.\n\n" +

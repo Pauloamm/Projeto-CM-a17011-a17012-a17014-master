@@ -17,16 +17,21 @@ class ResetPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset_password)
-        ref = FirebaseAuth.getInstance()
         supportActionBar!!.hide()
 
+
+        // Reference to Auth Firebase
+        ref = FirebaseAuth.getInstance()
+
+        // Manages button to send reset password email
         ConfirmResetPasswordButtonView.setOnClickListener {
             resetPassword()
         }
     }
 
-    fun resetPassword() {
+    private fun resetPassword() {
 
+        // Error management--------------------------
         if (emailToResetView.text.toString().isEmpty()) {
             emailToResetView.error = "Please Enter Email"
             emailToResetView.requestFocus()
@@ -38,9 +43,12 @@ class ResetPasswordActivity : AppCompatActivity() {
             emailToResetView.requestFocus()
             return
         }
+        // Error management--------------------------
 
 
 
+
+        // Sends email to reset password (forgot)
         ref.sendPasswordResetEmail(emailToResetView.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {

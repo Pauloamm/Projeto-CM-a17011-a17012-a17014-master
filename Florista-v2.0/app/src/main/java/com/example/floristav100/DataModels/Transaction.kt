@@ -15,6 +15,9 @@ class Transaction  {
     var quantitiesList : MutableList<Int> = ArrayList()
     var bouquetsBoughtList : MutableList<Bouquets> = ArrayList()
 
+    // Used for reading in Firebase without it going BOOOOOM Exception
+    constructor()
+    
     constructor(bouquetsQuantity : MutableList<Int>, boughtBouquets : MutableList<Bouquets>, totalPrice : Int){
 
 
@@ -23,13 +26,17 @@ class Transaction  {
 
        this.totalPrice = totalPrice
 
+        // Gets current time
         getCurrentTime()
 
+        // Calculates total bouquets
         totalBouquetsCalculator()
     }
 
 
     private fun getCurrentTime(){
+
+        // Gets time at which the transaction was made
 
         var currentTime : Calendar = Calendar.getInstance()
 
@@ -51,6 +58,8 @@ class Transaction  {
     }
 
     private fun getMonthName(month : Int) : String{
+
+        // Receives month by number and returns its name
 
 
         when (month){
@@ -81,5 +90,5 @@ class Transaction  {
         this.totalBouquets = total
     }
 
-    constructor()
+
 }

@@ -18,20 +18,20 @@ class FlowerSelection {
 
     constructor(){
 
-        PredefinedListCreation()
+        predefinedListCreation()
     }
 
     constructor(bouquetReceivedForEdit : Bouquets){
 
-        PredefinedListCreation()
-        CountersDefinedByPreviousCreatedBouquet(bouquetReceivedForEdit)
+        predefinedListCreation()
+        countersDefinedByPreviousCreatedBouquet(bouquetReceivedForEdit)
 
 
 
 
     }
 
-    private fun CountersDefinedByPreviousCreatedBouquet(bouquetReceivedForEdit : Bouquets){
+    private fun countersDefinedByPreviousCreatedBouquet(bouquetReceivedForEdit : Bouquets){
 
         numberSunflowerSelected = bouquetReceivedForEdit.sunflowerCounter
         numberRoseSelected = bouquetReceivedForEdit.roseCounter
@@ -41,7 +41,7 @@ class FlowerSelection {
     }
 
     // Creates List with all different type of flowers
-    private fun PredefinedListCreation(){
+    private fun predefinedListCreation(){
 
         allDifferentFlowerTypes.add(Sunflower())
         allDifferentFlowerTypes.add((Rose()))

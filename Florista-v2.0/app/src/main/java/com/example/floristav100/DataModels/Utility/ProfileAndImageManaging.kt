@@ -12,8 +12,11 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 
-object ImageManaging {
+object ProfileAndImageManaging  {
 
+
+
+    // Updates current Image Views
     fun updateView(imageView : ImageView, bitmapImage : Bitmap){
 
         imageView.setImageBitmap(bitmapImage)
@@ -27,11 +30,11 @@ object ImageManaging {
             .into(imageView)
 
     }
+    //-----------------------------
 
 
-
-
-     fun savesImageToFirebaseStorage(bitmapImage : Bitmap, referenceToUser : FirebaseAuth, context : Context){
+    // Stores image in Firebase storage and updates profile
+    fun imageStorageAndProfileUpdate(bitmapImage : Bitmap, newUsername: String, referenceToUser : FirebaseAuth, context : Context){
 
 
         val baos = ByteArrayOutputStream()
@@ -54,6 +57,9 @@ object ImageManaging {
                     urlTask.result?.let{
 
                         Toast.makeText(context,"Image uploaded successfully", Toast.LENGTH_LONG).show()
+                        updateProfile(referenceToUser,newUsername,it, context)
+
+
 
                     }
                 }
@@ -68,11 +74,36 @@ object ImageManaging {
 
     }
 
-    fun updateProfile(){
 
 
+    // Updates Image and Username
+    private fun updateProfile(ref : FirebaseAuth, newUsername : String, imageUriToSave : Uri, context: Context){
+
+
+        val updates = UserProfileChangeRequest.Builder()
+            .setDisplayName(newUsername)
+            .setPhotoUri(imageUriToSave)
+            .build()
+
+        ref.currentUser!!.updateProfile(updates)
+            ?.addOnCompleteListener{ task ->
+                if (task.isSuccessful){
+
+                    Toast.makeText(context, "Profile info Updated", Toast.LENGTH_LONG).show()
+
+
+                } else {
+
+                    Toast.makeText(context, task.exception?.message!!, Toast.LENGTH_LONG).show()
+                }
+
+            }
 
     }
+
+
+
+
 
 
 

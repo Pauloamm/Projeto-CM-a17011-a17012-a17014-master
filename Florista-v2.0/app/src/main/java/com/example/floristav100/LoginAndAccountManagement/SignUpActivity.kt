@@ -11,18 +11,14 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
-import com.bumptech.glide.Glide
-import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
+import com.example.floristav100.DataModels.Utility.ProfileAndImageManaging
 import com.example.floristav100.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
-import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_login.emailView
 import kotlinx.android.synthetic.main.activity_login.passwordView
 import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
-import java.io.ByteArrayOutputStream
 
 
 // Documentation used as base for code
@@ -56,7 +52,7 @@ class SignUpActivity : AppCompatActivity() {
         // Manages Image click
         newAccountImageView.setOnClickListener{
 
-            // Method used for setting up dialog for type of image choosing(camera or gallery)
+            // Method used for setting up confirmPasswordDialog for type of image choosing(camera or gallery)
             methodForImageChoosing()
         }
 
@@ -114,8 +110,14 @@ class SignUpActivity : AppCompatActivity() {
                         ?.addOnCompleteListener { task ->
                             if(task.isSuccessful){
 
-                                // Saves selected image for profile picture(if not selected a random one is used)
-                                savesImageToFirebaseStorage()
+                                // Saves selected image for profile picture and Updates Profile
+
+                                ProfileAndImageManaging.imageStorageAndProfileUpdate(
+                                    newAccountImageView.drawable.toBitmap(),
+                                    usernameView.text.toString(),
+                                    ref,
+                                    this)
+
 
 
 
@@ -140,7 +142,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun methodForImageChoosing(){
 
-        // Sets up dialog View
+        // Sets up confirmPasswordDialog View
         val bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
         bottomSheetDialog.setContentView(view)
@@ -156,6 +158,7 @@ class SignUpActivity : AppCompatActivity() {
 
 
     }
+
 
     private fun pickImageFromCamera(){
 
@@ -173,8 +176,9 @@ class SignUpActivity : AppCompatActivity() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "Select Image"), 2)
+       startActivityForResult(Intent.createChooser(intent, "Select Image"), 2)
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -187,7 +191,7 @@ class SignUpActivity : AppCompatActivity() {
             var bitmapImage  = data?.extras?.get("data") as Bitmap
 
             // Updates ImageView
-            newAccountImageView.setImageBitmap(bitmapImage)
+            ProfileAndImageManaging.updateView(newAccountImageView, bitmapImage)
 
         }
 
@@ -200,7 +204,7 @@ class SignUpActivity : AppCompatActivity() {
              var bitmapImage = BitmapFactory.decodeStream(inputStream)
 
              // Updates ImageView
-             newAccountImageView.setImageBitmap(bitmapImage)
+             ProfileAndImageManaging.updateView(newAccountImageView, bitmapImage)
 
         }
     }
@@ -208,79 +212,6 @@ class SignUpActivity : AppCompatActivity() {
 
 
 
-    private fun savesImageToFirebaseStorage(){
 
-
-
-
-        val baos = ByteArrayOutputStream()
-
-
-        val storageRef = FirebaseStorage.getInstance().
-            reference
-            .child("pics/${ref.currentUser!!.uid}")
-
-        newAccountImageView.drawable.toBitmap()!!.compress(Bitmap.CompressFormat.JPEG,100, baos)
-
-        val image = baos.toByteArray()
-
-        val upload = storageRef.putBytes(image)
-
-
-        upload.addOnCompleteListener() { uploadTask ->
-            if (uploadTask.isSuccessful){
-                storageRef.downloadUrl.addOnCompleteListener{ urlTask ->
-                    urlTask.result?.let{
-
-                        imageUri = it
-
-                        Toast.makeText(this,"Image uploaded successfully", Toast.LENGTH_LONG).show()
-
-                        saveImage()
-
-
-                    }
-                }
-            }else {
-                uploadTask.exception?.let{
-                    Toast.makeText(this,"Image Not Uploaded!", Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-
-
-    }
-
-    private fun saveImage(){
-
-        val username = usernameView.text.toString()
-
-        var imageToSave = when{
-
-            imageUri == null -> Uri.parse("https://picsum.photos/200")
-            imageUri != null -> imageUri
-            else -> Uri.parse("https://picsum.photos/200")
-
-        }
-
-        val updates = UserProfileChangeRequest.Builder()
-            .setDisplayName(username)
-            .setPhotoUri(imageToSave)
-            .build()
-
-        ref.currentUser!!.updateProfile(updates)
-            ?.addOnCompleteListener{ task ->
-                if (task.isSuccessful){
-
-                    Toast.makeText(this, "Profile info saved", Toast.LENGTH_LONG).show()
-
-
-                } else {
-
-                    Toast.makeText(this, task.exception?.message!!, Toast.LENGTH_LONG).show()
-                }
-
-            }
-    }
 
 }

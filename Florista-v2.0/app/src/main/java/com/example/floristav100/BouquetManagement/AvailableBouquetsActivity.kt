@@ -87,10 +87,10 @@ class AvailableBouquetsActivity : AppCompatActivity() {
                 dialog.setCancelable(true)
 
 
-                // dialog.show()
+                // confirmPasswordDialog.show()
 
 
-                //val customDialog = dialog.create()
+                //val customDialog = confirmPasswordDialog.create()
 
                 //customDialog.show()
                 dialog.show()

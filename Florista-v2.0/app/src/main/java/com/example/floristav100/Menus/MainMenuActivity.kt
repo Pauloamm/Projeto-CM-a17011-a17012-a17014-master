@@ -5,22 +5,14 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.example.floristav100.AccountSettingsAndInfo.AccountSettingsActivity
-import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
 import com.example.floristav100.BouquetManagement.AvailableBouquetsActivity
 import com.example.floristav100.BouquetManagement.CreateCustomBouquetActivity
-import com.example.floristav100.DataModels.Bouquets
+import com.example.floristav100.DataModels.Utility.ProfileAndImageManaging
 import com.example.floristav100.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
-import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_account_settings.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_menu.*
 import kotlinx.android.synthetic.main.dialog_password_check.view.*
 
@@ -37,28 +29,62 @@ class MainMenuActivity : AppCompatActivity() {
         supportActionBar!!.hide()
 
 
+        // gets instance of current player for data display
         ref = FirebaseAuth.getInstance()
 
 
+        // Updates avatar ImageView
+        ProfileAndImageManaging.updateView(mainAvatarImageView,ref.currentUser!!.photoUrl!!,this)
 
-        Glide.with(this)
-            .load(ref.currentUser!!.photoUrl)
-            .into(mainAvatarImageView)
-
+        // Updates TextViews with profile info
         usernameTextView.text = ref.currentUser!!.displayName
         emailTextView.text = ref.currentUser!!.email
 
 
 
-
-        usernameTextView.text = ref.currentUser!!.displayName
-        emailTextView.text = ref.currentUser!!.email
-
+        // Manages Edit profile button click
         editButtonView.setOnClickListener{
 
-            dialog()
+            confirmPasswordDialog()
 
         }
+
+        // Manages the 4 main buttons for different options
+        mainMenuButtonsManager()
+
+
+        // Manages instagram clicks
+        instagramButtonsManager()
+
+
+    }
+
+
+    private fun instagramButtonsManager(){
+
+
+        // According to which insta selected it opens up for web or app view
+
+        pauloInstaButtonView.setOnClickListener{
+            var url : String = "https://www.instagram.com/pauloamm2000/"
+            var intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+
+        luisInstaButtonView.setOnClickListener{
+
+            var url : String = "https://www.instagram.com/luismsilva99/"
+            var intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+
+
+        }
+
+    }
+
+    private fun mainMenuButtonsManager(){
 
         historyButtonView.setOnClickListener{
             var intent = Intent(this, HistoryActivity::class.java)
@@ -87,29 +113,9 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
 
-        pauloInstaButtonView.setOnClickListener{
-            var url : String = "https://www.instagram.com/pauloamm2000/"
-            var intent = Intent(Intent.ACTION_VIEW)
-            intent.setData(Uri.parse(url))
-            startActivity(intent)
-        }
-
-        luisInstaButtonView.setOnClickListener{
-
-            var url : String = "https://www.instagram.com/luismsilva99/"
-            var intent = Intent(Intent.ACTION_VIEW)
-            intent.setData(Uri.parse(url))
-            startActivity(intent)
-
-
-        }
-
-
     }
 
-
-
-    fun dialog(){
+    private fun confirmPasswordDialog(){
         //--------------------------------
         var dialog = AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK)
         val dialogView = layoutInflater.inflate(R.layout.dialog_password_check,null)
@@ -152,21 +158,27 @@ class MainMenuActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
 
+        // Manages result from AccountSettingsActivity
+
         if (requestCode == 1 && resultCode == Activity.RESULT_OK  )
         {
-            var UpdateInformation : String = data?.getStringExtra("UpdateInformation")!!
+            var updateInformationType : String = data?.getStringExtra("UpdateInformation")!!
 
-            when (UpdateInformation) {
+            when (updateInformationType) {
                 "UpdateProfile" ->{
-                    Glide.with(this)
-                        .load(ref.currentUser!!.photoUrl)
-                        .into(mainAvatarImageView)
 
+                    // Updates Image View according to the new photo stored in profile
+                    ProfileAndImageManaging.updateView(mainAvatarImageView, ref.currentUser!!.photoUrl!!, this)
+
+                    // Updates main username view according to new username saved in profile in settings activity
                     usernameTextView.text = ref.currentUser!!.displayName
                 }
-                // Updates Email TextView
+
+                // Updates Email TextView according to new email stored in account
                 "UpdateEmail" -> emailTextView.text = ref.currentUser!!.email
-                // Deletes Current Account
+
+
+                // After account deletion send you back to login screen
                 "DeleteAccount" -> finish()
             }
 

@@ -39,6 +39,7 @@ class AccountSettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_account_settings)
         supportActionBar!!.hide()
 
+        // Defaults result to cancelled 
         setResult(Activity.RESULT_CANCELED)
 
         ref = FirebaseAuth.getInstance()
@@ -46,7 +47,7 @@ class AccountSettingsActivity : AppCompatActivity() {
         refForDelete = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
 
 
-        // DECODE URI TO BITMAP
+
 
         // PARA POR A PUTA DA PHOTOURL NA IMAGEM
         Glide.with(this)

@@ -18,7 +18,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="49dp"
         android:src="@drawable/default_image"
-        android:background="@drawable/image_border"/>
+        />
 
 
 

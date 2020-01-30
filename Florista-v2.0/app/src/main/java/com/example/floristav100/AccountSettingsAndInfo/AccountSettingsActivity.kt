@@ -39,17 +39,13 @@ class AccountSettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_account_settings)
         supportActionBar!!.hide()
 
+        setResult(Activity.RESULT_CANCELED)
+
         ref = FirebaseAuth.getInstance()
 
         refForDelete = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!!)
 
 
-
-
-        // DECODE URI TO BITMAP
-        //val inputStream = contentResolver.openInputStream(ref.currentUser!!.photoUrl!!)
-        //val bitmap = BitmapFactory.decodeStream(inputStream)
-        //avatarImageView.setImageBitmap(bitmap)
         // DECODE URI TO BITMAP
 
         // PARA POR A PUTA DA PHOTOURL NA IMAGEM
@@ -123,6 +119,7 @@ class AccountSettingsActivity : AppCompatActivity() {
                         var intent = Intent()
                         intent.putExtra("UpdateInformation", "UpdateProfile")
                         setResult(Activity.RESULT_OK, intent)
+                        finish()
 
                     } else {
                         Toast.makeText(this, task.exception?.message!!, Toast.LENGTH_LONG).show()
@@ -198,6 +195,7 @@ class AccountSettingsActivity : AppCompatActivity() {
                 storageRef.downloadUrl.addOnCompleteListener{ urlTask ->
                     urlTask.result?.let{
                         imageUri = it
+
                         Toast.makeText(this,"talvez funcione!", Toast.LENGTH_LONG).show()
 
                         avatarImageView.setImageBitmap(bitmap)

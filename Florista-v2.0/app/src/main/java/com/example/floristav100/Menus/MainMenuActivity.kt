@@ -28,7 +28,6 @@ class MainMenuActivity : AppCompatActivity() {
 
 
     private lateinit var ref : FirebaseAuth
-    private lateinit var refToUpdateImage : DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,8 +36,8 @@ class MainMenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_menu)
         supportActionBar!!.hide()
 
+
         ref = FirebaseAuth.getInstance()
-        refToUpdateImage = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! + "/otêpai")
 
 
 
@@ -152,12 +151,11 @@ class MainMenuActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        var UpdateInformation : String = data?.getStringExtra("UpdateInformation")!!
 
-
-
-        if (resultCode == Activity.RESULT_OK && requestCode == 1)
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK  )
         {
+            var UpdateInformation : String = data?.getStringExtra("UpdateInformation")!!
+
             when (UpdateInformation) {
                 "UpdateProfile" ->{
                     Glide.with(this)

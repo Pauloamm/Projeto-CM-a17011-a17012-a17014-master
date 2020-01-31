@@ -5,9 +5,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/app_icon_squared"
+        android:label="D.Lurdes Florista"
+        android:roundIcon="@drawable/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".BouquetManagement.AvailableBouquetsActivity"></activity>
@@ -27,7 +27,7 @@
         <activity
 
             android:name=".LoginAndAccountManagement.LoginActivity"
-            android:label="@string/app_name"
+            android:label="D.Lurdes Florista"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

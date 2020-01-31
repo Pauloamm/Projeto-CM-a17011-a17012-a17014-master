@@ -44,8 +44,7 @@ class AvailableBouquetsActivity : AppCompatActivity() {
         refToConfirmPassword = FirebaseAuth.getInstance()
 
 
-        // Created predefined bouquets(not stored in Firebase)
-        predefinedBouquetsCreation()
+
 
 
         // Sets up adapter for the list
@@ -123,55 +122,6 @@ class AvailableBouquetsActivity : AppCompatActivity() {
 
 
 
-    // Creates 3 predefined Bouquets that are not stored in Firebase
-    private fun predefinedBouquetsCreation() {
-        var flowersListForPredefinedBouquet: MutableList<Flowers> = ArrayList<Flowers>()
-
-        //First Bouquet- 100 sunflowers
-
-        for(x in 0..99  ){
-
-
-            flowersListForPredefinedBouquet.add(Sunflower())
-
-        }
-        bouquetList.add(Bouquets("Shooting Star",flowersListForPredefinedBouquet,
-            R.drawable.shootingstar
-        ))
-
-        flowersListForPredefinedBouquet.clear()
-
-        //SecondBouquet- 100 Roses
-
-        for(x in 0..99  ){
-
-
-            flowersListForPredefinedBouquet.add(Rose())
-
-        }
-        bouquetList.add(Bouquets("Bloody Mary", flowersListForPredefinedBouquet,
-            R.drawable.bloodymary
-        ))
-
-        flowersListForPredefinedBouquet.clear()
-
-
-        //Third Bouquet- 100 Orchids
-
-        for(x in 0..99  ){
-
-
-            flowersListForPredefinedBouquet.add(Orchid())
-
-        }
-        bouquetList.add(Bouquets("Venus", flowersListForPredefinedBouquet,
-            R.drawable.venus
-        ))
-
-        flowersListForPredefinedBouquet.clear()
-
-
-    }
 
     // Reads the data from the associated Firebase and stores them in the list
     private fun readingFirebaseData(){
@@ -272,18 +222,7 @@ class AvailableBouquetsActivity : AppCompatActivity() {
 
     }
 
-   // Manages the button for the CreateCustomBouquetActivity
-    private fun addNewBouquetManager(){
 
-        //addNewBouquet.setOnClickListener {
-
-           // val intent = Intent(this@AvailableBouquetsActivity, CreateCustomBouquetActivity::class.java)
-
-           // startActivity(intent)
-
-        //}
-
-    }
 
     // Manages activity results from EditBouquetActivity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -405,19 +344,38 @@ class AvailableBouquetsActivity : AppCompatActivity() {
             textViewFlowerCount.text = flowersNumbers
 
 
-
-            // If the bouquet is not a predefined one it can Update or be deleted
-            if(currentBouquet.id != null)
-            v.setOnClickListener{
+            // Manages item click
+            v.setOnClickListener {
 
 
-                var intent = Intent(this@AvailableBouquetsActivity, EditBouquetActivity::class.java)
+                // Only shows edit menu if the bouquet is not predefined
+                if( currentBouquet.id != "PredefinedBouquet_1"
+                    && currentBouquet.id != "PredefinedBouquet_2"
+                    && currentBouquet.id != "PredefinedBouquet_3"){
 
-                intent.putExtra("CurrentBouquet", getItem(position) as Bouquets)
 
-                startActivityForResult(intent,1)
+                    var intent = Intent(this@AvailableBouquetsActivity, EditBouquetActivity::class.java)
+
+                    intent.putExtra("CurrentBouquet", getItem(position) as Bouquets)
+
+                    startActivityForResult(intent,1)
+
+
+
+                }
+                // If the bouquet is not a predefined one it can Update or be deleted
+                else{
+
+                    Toast.makeText(this@AvailableBouquetsActivity, "Predefined Bouquets can't be edited!", Toast.LENGTH_SHORT).show()
+
+                }
 
             }
+
+
+
+
+
 
 
             return  v

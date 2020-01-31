@@ -4,21 +4,29 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
+import com.example.floristav100.AccountSettingsAndInfo.UserIdFirebase
+import com.example.floristav100.DataModels.Bouquets
+import com.example.floristav100.DataModels.FlowerHierarchy.Flowers
+import com.example.floristav100.DataModels.FlowerHierarchy.Orchid
+import com.example.floristav100.DataModels.FlowerHierarchy.Rose
+import com.example.floristav100.DataModels.FlowerHierarchy.Sunflower
 import com.example.floristav100.DataModels.Utility.ProfileAndImageManaging
 import com.example.floristav100.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login.emailView
 import kotlinx.android.synthetic.main.activity_login.passwordView
 import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
+import java.util.ArrayList
 
 
 // Documentation used as base for code
@@ -27,7 +35,8 @@ import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var ref : FirebaseAuth
+    private lateinit var refToAcc : FirebaseAuth
+    private lateinit var refToDatabase : DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +45,10 @@ class SignUpActivity : AppCompatActivity() {
         supportActionBar!!.hide()
 
         // Gets Firebase Auth Instance
-        ref = FirebaseAuth.getInstance()
+        refToAcc = FirebaseAuth.getInstance()
 
 
-        // Mnages new accoutn creation button click
+        // Manages new account creation button click
         CreateAccountButtonView.setOnClickListener{
 
             // Method responsible for account creation
@@ -100,12 +109,12 @@ class SignUpActivity : AppCompatActivity() {
 
 
         // Creates user account in Firebase
-        ref.createUserWithEmailAndPassword(emailView.text.toString(), passwordView.text.toString())
+        refToAcc.createUserWithEmailAndPassword(emailView.text.toString(), passwordView.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
 
                     // If account created successfully send verification email
-                    ref.currentUser?.sendEmailVerification()
+                    refToAcc.currentUser?.sendEmailVerification()
                         ?.addOnCompleteListener { task ->
                             if(task.isSuccessful){
 
@@ -114,8 +123,10 @@ class SignUpActivity : AppCompatActivity() {
                                 ProfileAndImageManaging.imageStorageAndProfileUpdate(
                                     newAccountImageView.drawable.toBitmap(),
                                     usernameView.text.toString(),
-                                    ref,
+                                    refToAcc,
                                     this)
+
+                                predefinedBouquetsCreation()
 
 
 
@@ -207,6 +218,80 @@ class SignUpActivity : AppCompatActivity() {
 
         }
     }
+
+
+    // Creates 3 predefined Bouquets that are stored in Firebase
+    private fun predefinedBouquetsCreation() {
+
+        refToDatabase =  FirebaseDatabase.getInstance().getReference(refToAcc.currentUser!!.uid +"/Available Bouquets")
+
+        var flowersListForPredefinedBouquet: MutableList<Flowers> = ArrayList<Flowers>()
+
+        //First Bouquet- 100 sunflowers
+
+        for(x in 0..99  ){
+
+
+            flowersListForPredefinedBouquet.add(Sunflower())
+
+        }
+
+        // gets id to store
+        var idToSave = refToDatabase.push().key
+
+        // Created predefined bouquet and stores it
+        var bouquetToSave = Bouquets("Shooting Star",flowersListForPredefinedBouquet,R.drawable.shootingstar)
+        bouquetToSave.id = "PredefinedBouquet_1"
+
+        refToDatabase.child(idToSave!!).
+            setValue(bouquetToSave)
+
+
+        // Clears list for reuse
+        flowersListForPredefinedBouquet.clear()
+
+        //SecondBouquet- 100 Roses
+
+        for(x in 0..99  ){
+
+
+            flowersListForPredefinedBouquet.add(Rose())
+
+        }
+
+        idToSave = refToDatabase.push().key
+
+        bouquetToSave = Bouquets("Bloody Mary",flowersListForPredefinedBouquet,R.drawable.bloodymary)
+        bouquetToSave.id = "PredefinedBouquet_2"
+
+        refToDatabase.child(idToSave!!).
+            setValue(bouquetToSave)
+
+
+        flowersListForPredefinedBouquet.clear()
+
+
+        //Third Bouquet- 100 Orchids
+
+        for(x in 0..99  ){
+
+
+            flowersListForPredefinedBouquet.add(Orchid())
+
+        }
+
+        idToSave = refToDatabase.push().key
+
+        bouquetToSave = Bouquets("Venus",flowersListForPredefinedBouquet,R.drawable.venus)
+        bouquetToSave.id = "PredefinedBouquet_3"
+
+        refToDatabase.child(idToSave!!).
+            setValue(bouquetToSave)
+        flowersListForPredefinedBouquet.clear()
+
+
+    }
+
 
 
 

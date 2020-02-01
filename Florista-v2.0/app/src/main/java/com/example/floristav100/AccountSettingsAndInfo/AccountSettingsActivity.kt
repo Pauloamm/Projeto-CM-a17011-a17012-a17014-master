@@ -155,10 +155,25 @@ class AccountSettingsActivity : AppCompatActivity() {
             }
 
             // Only updates when written username is not empty
-            ProfileAndImageManaging.imageStorageAndProfileUpdate(avatarImageView.drawable.toBitmap(),newUsername,refAcc, this)
-            finish()
+            var intent = Intent()
+            intent.putExtra("UpdateInformation","UpdateProfile")
+
+            setResult(Activity.RESULT_OK, intent)
+
+           // Updates profile and finishes this activity once is all done
+            ProfileAndImageManaging.imageStorageAndProfileUpdate(avatarImageView.drawable.toBitmap(),newUsername,refAcc, this,{
+
+                finish()
+
+            })
+
+
+
+
+
         }
     }
+
 
     private fun newEmailAccount() {
 

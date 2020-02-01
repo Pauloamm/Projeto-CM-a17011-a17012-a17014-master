@@ -112,21 +112,19 @@ class SignUpActivity : AppCompatActivity() {
                         ?.addOnCompleteListener { task ->
                             if(task.isSuccessful){
 
-                                // Saves selected image for profile picture and Updates Profile
+                                // Saves selected image for profile picture and Updates Profile and finishes activity once is all wrapped up
 
                                 ProfileAndImageManaging.imageStorageAndProfileUpdate(
                                     newAccountImageView.drawable.toBitmap(),
                                     usernameView.text.toString(),
                                     refToAcc,
-                                    this)
+                                    this,{finish()})
 
                                 predefinedBouquetsCreation()
 
                                 Toast.makeText(this, "Account Created Successfully",
                                     Toast.LENGTH_SHORT).show()
 
-                                // Goes back to login screen
-                                finish()
                             }
                         }
                 } else {

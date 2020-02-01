@@ -114,11 +114,7 @@ class EditBouquetActivity : AppCompatActivity (){
             Orchid()
         )
 
-
-
         return Bouquets("Custom Bouquet", flowerListForCustomBouquet, imageChoosing())
-
-
     }
 
     private fun imageChoosing() : Int{

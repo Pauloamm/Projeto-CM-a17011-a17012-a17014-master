@@ -22,14 +22,23 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-
-
         // Gets Firebase Authenticatiopn for login methods
         ref = FirebaseAuth.getInstance()
 
-
         // Manages button click
         buttonManager()
+    }
+
+    // Auto mail placement if there is any data of account in phone
+    override fun onStart() {
+        super.onStart()
+
+        // Checks for existing user
+        val currentUser = ref.currentUser
+
+        // If there is already data of a current account it writes the email automatically
+        if (currentUser != null)
+            emailView.text = Editable.Factory.getInstance().newEditable(currentUser.email)
     }
 
     private fun buttonManager(){
@@ -67,18 +76,12 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-
         if (passwordView.text.toString().isEmpty()){
             passwordView.error = "Please Enter Password"
             passwordView.requestFocus()
             return
         }
-
-
-
-
         //-------------------------------------------------//
-
 
         // Checks if there is an account created with the corresponding email and password inserted
         ref.signInWithEmailAndPassword(emailView.text.toString(), passwordView.text.toString())
@@ -88,28 +91,16 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     val user = ref.currentUser
                     updateUI(user)
+
                 } else {
                     // If sign in fails, display a message to the user.
 
                     updateUI(null)
                 }
-
             }
     }
 
-    // Auto mail placement if there is any data of account in phone
-    public override fun onStart() {
-        super.onStart()
 
-        // Checks for existing user
-        val currentUser = ref.currentUser
-
-        // If there is already data of a current account it writes the email automatically
-        if (currentUser != null)
-            emailView.text = Editable.Factory.getInstance().newEditable(currentUser.email)
-
-
-    }
 
     // According to result of matching password and email it takes action
     private fun updateUI(currentUser : FirebaseUser?){
@@ -120,14 +111,12 @@ class LoginActivity : AppCompatActivity() {
                 UserIdFirebase.UID = currentUser.uid
 
                 startActivity(Intent(this, MainMenuActivity::class.java))
-
             }
             else {
                 Toast.makeText(baseContext, "Email Not Verified.",
                     Toast.LENGTH_SHORT).show()
             }
         }
-
         // If there is no currentUser it shows login error (not found user with current data inserted)
         else {
             Toast.makeText(baseContext, "Wrong Email/Password. Try again",

@@ -50,7 +50,6 @@ object ProfileAndImageManaging  {
 
         val upload = storageRef.putBytes(image)
 
-
         // Uploads image to Firebase Storage and gets its Uri to store in profile
         upload.addOnCompleteListener { uploadTask ->
             if (uploadTask.isSuccessful){
@@ -61,9 +60,6 @@ object ProfileAndImageManaging  {
 
                         // Updates profile with new data(including image Uri)
                         updateProfile(referenceToUser,newUsername,it, context)
-
-
-
                     }
                 }
             }else {
@@ -73,15 +69,12 @@ object ProfileAndImageManaging  {
                 }
             }
         }
-
-
     }
 
 
 
     // Updates Image and Username
     private fun updateProfile(ref : FirebaseAuth, newUsername : String, imageUriToSave : Uri, context: Context){
-
 
         val updates = UserProfileChangeRequest.Builder()
             .setDisplayName(newUsername)
@@ -91,12 +84,8 @@ object ProfileAndImageManaging  {
         ref.currentUser!!.updateProfile(updates)
             ?.addOnCompleteListener{ task ->
                 if (task.isSuccessful){
-
                     Toast.makeText(context, "Profile info Updated", Toast.LENGTH_LONG).show()
-
-
                 } else {
-
                     Toast.makeText(context, task.exception?.message!!, Toast.LENGTH_LONG).show()
                 }
 

@@ -41,7 +41,6 @@ class AccountSettingsActivity : AppCompatActivity() {
 
         // Manages clicks of buttons
         buttonManager()
-
     }
 
 
@@ -50,13 +49,9 @@ class AccountSettingsActivity : AppCompatActivity() {
         // Updates avatar ImageView
         ProfileAndImageManaging.updateView(avatarImageView,refAcc.currentUser!!.photoUrl!!, this)
 
-
         // Updates TextViews/EditTextViews with profile info
         usernameTextViewSettings.text = Editable.Factory.getInstance().newEditable(refAcc.currentUser!!.displayName)
         emailTextViewSettings.text = refAcc.currentUser!!.email
-
-
-
     }
 
     private fun buttonManager(){
@@ -69,11 +64,9 @@ class AccountSettingsActivity : AppCompatActivity() {
         // Manages Update profile button click
         updateProfileButtonManager()
 
-
         // Manages new email button click
         newEmailButtonView.setOnClickListener {
             newEmailAccount()
-
         }
 
         // Manages new password button click
@@ -85,11 +78,7 @@ class AccountSettingsActivity : AppCompatActivity() {
         deleteAccountButtonView.setOnClickListener{
             deleteAccount()
         }
-
-
     }
-
-
 
     private fun methodForImageChoosing(){
 
@@ -106,8 +95,6 @@ class AccountSettingsActivity : AppCompatActivity() {
         view.galleryId.setOnClickListener{
             pickImageFromGallery()
         }
-
-
     }
 
     private fun pickImageFromCamera(){
@@ -170,10 +157,7 @@ class AccountSettingsActivity : AppCompatActivity() {
             // Only updates when written username is not empty
             ProfileAndImageManaging.imageStorageAndProfileUpdate(avatarImageView.drawable.toBitmap(),newUsername,refAcc, this)
             finish()
-
         }
-
-
     }
 
     private fun newEmailAccount() {
@@ -270,13 +254,10 @@ class AccountSettingsActivity : AppCompatActivity() {
         }
         // Error management-----------------------------
 
-
-
         // Updates password of current user
         refAcc.currentUser!!.updatePassword(newPasswordView.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-
 
                     Toast.makeText(
                         this, "Password Changed Successfully",
@@ -293,13 +274,9 @@ class AccountSettingsActivity : AppCompatActivity() {
                     ).show()
                 }
             }
-
-
     }
 
     private fun deleteAccount(){
-
-
 
         // Removes the node from the Firebase of the selected account
         FirebaseDatabase.getInstance().getReference(refAcc.currentUser!!.uid).removeValue()

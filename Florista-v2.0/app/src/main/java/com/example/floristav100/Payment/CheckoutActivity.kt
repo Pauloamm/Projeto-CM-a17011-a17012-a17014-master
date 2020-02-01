@@ -43,7 +43,6 @@ class CheckoutActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
-
         supportActionBar!!.hide()
 
         // Gets the number of selected bouquets
@@ -51,21 +50,12 @@ class CheckoutActivity : AppCompatActivity(){
 
         for(x in 1.. checkedBouquetCounter){
 
-
             // Gets all bouquets sent through intent (the ones selected) and adds them to the list
             var bouquetKey = "BouquetNumber" + x
             var currentBouquet = intent.getSerializableExtra(bouquetKey) as Bouquets
-
             checkoutBouquetList.add(currentBouquet)
-
             bouquetsQuantity.add(1)
-
-
         }
-
-
-
-
 
         // Initial total price(1 of each bouquet)
         for(b in checkoutBouquetList){
@@ -75,17 +65,13 @@ class CheckoutActivity : AppCompatActivity(){
         }
         paypalAmountCheckout.text = "" + priceToPay + "€"
 
-
         config = PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(
             UserInfo.client_id)
         var intent = Intent(this, PayPalService::class.java)
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config)
         startService(intent)
 
-
-
         paypalButton.setOnClickListener{
-
 
             amount = priceToPay.toDouble()
 
@@ -96,12 +82,8 @@ class CheckoutActivity : AppCompatActivity(){
             startActivityForResult(intent, 1)
         }
 
-
-
-
         // Sets up custom adapter
         checkoutListView.adapter = CheckoutListAdapter()
-
     }
 
 
@@ -110,12 +92,9 @@ class CheckoutActivity : AppCompatActivity(){
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 1){
-
             if (resultCode == Activity.RESULT_OK)
             {
-
                 var refToSaveTransaction = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! + "/Transaction History")
-
 
                 var newTransactionID = refToSaveTransaction.push().key
                 var newTransaction = Transaction(bouquetsQuantity, checkoutBouquetList, priceToPay)

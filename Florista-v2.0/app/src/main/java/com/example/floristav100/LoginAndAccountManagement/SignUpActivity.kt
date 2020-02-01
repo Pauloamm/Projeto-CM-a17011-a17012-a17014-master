@@ -47,15 +47,12 @@ class SignUpActivity : AppCompatActivity() {
         // Gets Firebase Auth Instance
         refToAcc = FirebaseAuth.getInstance()
 
-
         // Manages new account creation button click
         CreateAccountButtonView.setOnClickListener{
 
             // Method responsible for account creation
             newAccountCreation()
-
         }
-
 
         // Manages Image click
         newAccountImageView.setOnClickListener{
@@ -63,10 +60,7 @@ class SignUpActivity : AppCompatActivity() {
             // Method used for setting up confirmPasswordDialog for type of image choosing(camera or gallery)
             methodForImageChoosing()
         }
-
-
     }
-
 
 
     private fun newAccountCreation(){
@@ -128,9 +122,6 @@ class SignUpActivity : AppCompatActivity() {
 
                                 predefinedBouquetsCreation()
 
-
-
-
                                 Toast.makeText(this, "Account Created Successfully",
                                     Toast.LENGTH_SHORT).show()
 
@@ -138,15 +129,12 @@ class SignUpActivity : AppCompatActivity() {
                                 finish()
                             }
                         }
-
-
                 } else {
 
                     // If sign in fails, display a message to the user.
                     Toast.makeText(this, "Password too Short. Try Again!",
                         Toast.LENGTH_SHORT).show()
                 }
-
             }
     }
 
@@ -166,8 +154,6 @@ class SignUpActivity : AppCompatActivity() {
         view.galleryId.setOnClickListener{
             pickImageFromGallery()
         }
-
-
     }
 
     private fun pickImageFromCamera(){
@@ -196,26 +182,22 @@ class SignUpActivity : AppCompatActivity() {
         // If photo is taken from camera successfully
         if (requestCode == 1 && resultCode == Activity.RESULT_OK)
         {
-
             // Gets bitmap image from camera
             var bitmapImage  = data?.extras?.get("data") as Bitmap
 
             // Updates ImageView
             ProfileAndImageManaging.updateView(newAccountImageView, bitmapImage)
-
         }
 
         // If photo is selected from gallery
-         if(requestCode == 2 && resultCode == Activity.RESULT_OK){
-
-
+         if(requestCode == 2 && resultCode == Activity.RESULT_OK)
+         {
              // Converts Uri to bitmap
             val inputStream = contentResolver.openInputStream(data!!.data!!)
              var bitmapImage = BitmapFactory.decodeStream(inputStream)
 
              // Updates ImageView
              ProfileAndImageManaging.updateView(newAccountImageView, bitmapImage)
-
         }
     }
 
@@ -229,12 +211,8 @@ class SignUpActivity : AppCompatActivity() {
 
         //First Bouquet- 100 sunflowers
 
-        for(x in 0..99  ){
+        for(x in 0..99  ) flowersListForPredefinedBouquet.add(Sunflower())
 
-
-            flowersListForPredefinedBouquet.add(Sunflower())
-
-        }
 
         // gets id to store
         var idToSave = refToDatabase.push().key
@@ -252,12 +230,8 @@ class SignUpActivity : AppCompatActivity() {
 
         //SecondBouquet- 100 Roses
 
-        for(x in 0..99  ){
+        for(x in 0..99  ) flowersListForPredefinedBouquet.add(Rose())
 
-
-            flowersListForPredefinedBouquet.add(Rose())
-
-        }
 
         idToSave = refToDatabase.push().key
 
@@ -273,12 +247,7 @@ class SignUpActivity : AppCompatActivity() {
 
         //Third Bouquet- 100 Orchids
 
-        for(x in 0..99  ){
-
-
-            flowersListForPredefinedBouquet.add(Orchid())
-
-        }
+        for(x in 0..99  ) flowersListForPredefinedBouquet.add(Orchid())
 
         idToSave = refToDatabase.push().key
 

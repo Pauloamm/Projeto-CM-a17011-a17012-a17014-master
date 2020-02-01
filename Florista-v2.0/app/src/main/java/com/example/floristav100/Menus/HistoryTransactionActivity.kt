@@ -28,64 +28,42 @@ class HistoryTransactionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_history_transaction)
         supportActionBar!!.hide()
 
-
-        setContentView(R.layout.activity_history_transaction)
-
-
-
         ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! + "/Transaction History")
-
 
         mExpandingList = findViewById(R.id.expanding_list_main)
 
         readingDataFirebase()
-
-
     }
 
 
 
     private fun readingDataFirebase(){
 
-
         ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
-
-
             override fun onDataChange(p0: DataSnapshot) {
-
                 if(p0.exists()){
-
                     for (h in p0.children){
-
 
                         // Gets current node Bouquet
                         var transactionInCurrentNode = h.getValue(Transaction::class.java)
-
 
                         transactionList.add(transactionInCurrentNode!!)
 
                         addItem(transactionInCurrentNode)
                     }
-
-                    // Updates listView
-                    // bouquetListView.adapter = BouquetAdapter()
                 }
-
 
                 if (transactionList.size == 0) bonus.visibility = View.VISIBLE
                 else bonus.visibility = View.INVISIBLE
             }
-
         })
     }
-
-
-
 
     private fun addItem(currentTransaction : Transaction) {
         //Let's create an item with R.layout.expanding_layout
@@ -100,11 +78,8 @@ class HistoryTransactionActivity : AppCompatActivity() {
             item.titleTextView.text = "Total Price: " + currentTransaction.totalPrice.toString() + "€"
             item.descriptionTextView.text = "Total Bouquets: " + currentTransaction.totalBouquets.toString()
 
-
-
             item.dateTextView.text = currentTransaction.currentDateString
             item.timeTextView.text = currentTransaction.currentTimeString
-
 
             //We can create items in batch.
             item.createSubItems(currentTransaction.bouquetsBoughtList.size)
@@ -116,19 +91,14 @@ class HistoryTransactionActivity : AppCompatActivity() {
                 //Let's set some values in
                 configureSubItem(view, currentTransaction.bouquetsBoughtList[i], currentTransaction.quantitiesList[i])
             }
-
-
-
         }
     }
 
     private fun configureSubItem(view: View, currentBouquet: Bouquets, currentBoquetQuantity : Int) {
 
-
         // Sets up each subItem view
 
         view.sub_titleTextView.text = currentBouquet.name
-
 
         //sets up flower count info on screen
         var flowersNumbers =
@@ -140,7 +110,6 @@ class HistoryTransactionActivity : AppCompatActivity() {
         view.sub_descriptionTextView.text = flowersNumbers
 
         view.sub_bouquetCounterTextView.text = "x" + currentBoquetQuantity.toString()
-
 
         view.sub_currentBouquetTotalPrice.text = "Price: " + currentBouquet.totalPrice * currentBoquetQuantity + "€"
 

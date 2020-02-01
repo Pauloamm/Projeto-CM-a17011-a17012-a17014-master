@@ -30,7 +30,6 @@ class AvailableBouquetsActivity : AppCompatActivity() {
 
     var bouquetList : MutableList<Bouquets> = ArrayList<Bouquets>()
     lateinit var ref: DatabaseReference
-    lateinit var refToConfirmPassword : FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,13 +37,8 @@ class AvailableBouquetsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportActionBar!!.hide()
 
-
         // Gets reference from correspondent node in Firebase of Bouquet storage
         ref = FirebaseDatabase.getInstance().getReference(UserIdFirebase.UID!! +"/Available Bouquets")
-        refToConfirmPassword = FirebaseAuth.getInstance()
-
-
-
 
 
         // Sets up adapter for the list
@@ -63,65 +57,6 @@ class AvailableBouquetsActivity : AppCompatActivity() {
 
 
     }
-
-
-
-
-    //------------------------ BOTAO SETTINGS ACC
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.detalhe_menu,menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_settings -> {
-
-
-
-                //--------------------------------
-                var dialog = AlertDialog.Builder(this)
-                val dialogView = layoutInflater.inflate(R.layout.dialog_password_check,null)
-                dialog.setView(dialogView)
-                dialog.setCancelable(true)
-
-
-                // confirmPasswordDialog.show()
-
-
-                //val customDialog = confirmPasswordDialog.create()
-
-                //customDialog.show()
-                dialog.show()
-
-               // customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener{
-                    dialogView.DialogPasswordButtonView.setOnClickListener{
-
-                    refToConfirmPassword.signInWithEmailAndPassword(refToConfirmPassword.currentUser!!.email.toString(), dialogView.dialogPasswordView.text.toString())
-                        .addOnCompleteListener(this) { task ->
-                            if (task.isSuccessful) {
-                                startActivityForResult(Intent(this, AccountSettingsActivity::class.java), 2)
-                            }
-                            else
-                            {
-                                dialogView.dialogPasswordView.error = "Wrong Password"
-                                dialogView.dialogPasswordView.requestFocus()
-                            }
-                        }
-
-
-                }
-                //--------------------------------
-
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-    //------------------------ BOTAO SETTINGS ACC
-
-
-
 
     // Reads the data from the associated Firebase and stores them in the list
     private fun readingFirebaseData(){
@@ -223,7 +158,6 @@ class AvailableBouquetsActivity : AppCompatActivity() {
     }
 
 
-
     // Manages activity results from EditBouquetActivity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -233,7 +167,6 @@ class AvailableBouquetsActivity : AppCompatActivity() {
 
             // Gets which action was made (Update)
             var typeOfReturn : String = data?.getStringExtra("TypeOfReturn")!!
-
 
             // UPDATE ACTION
              if(typeOfReturn == "UPDATE"){
@@ -262,8 +195,6 @@ class AvailableBouquetsActivity : AppCompatActivity() {
                 // Small message pop up to show it went sucessfully
                 Toast.makeText(this,"Bouquet Updated", Toast.LENGTH_LONG).show()
 
-
-
             }
 
             // DELETE ACTION
@@ -279,26 +210,14 @@ class AvailableBouquetsActivity : AppCompatActivity() {
 
                         bouquetList.remove(b)
                         break
-
                     }
-
                 }
-
                  // Makes small message pop up
                  Toast.makeText(this,"Bouquet Deleted", Toast.LENGTH_LONG).show()
-
             }
-
             // Updates listView
             bouquetListView.adapter = BouquetAdapter()
-
-
-
         }
-
-        // DEPOIS DE APAGAR - SAIR
-        else if(requestCode == 2 && resultCode == Activity.RESULT_OK) finish()
-
     }
 
     // Bouquet Adapter

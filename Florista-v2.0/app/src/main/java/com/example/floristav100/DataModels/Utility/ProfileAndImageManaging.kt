@@ -34,7 +34,7 @@ object ProfileAndImageManaging  {
 
 
     // Stores image in Firebase storage and updates profile
-    fun imageStorageAndProfileUpdate(bitmapImage : Bitmap, newUsername: String, referenceToUser : FirebaseAuth, context : Context){
+    fun imageStorageAndProfileUpdate(bitmapImage : Bitmap, newUsername: String, referenceToUser : FirebaseAuth, context : Context, _callback : () -> Unit) {
 
 
         val baos = ByteArrayOutputStream()
@@ -59,7 +59,9 @@ object ProfileAndImageManaging  {
                         Toast.makeText(context,"Image uploaded successfully", Toast.LENGTH_LONG).show()
 
                         // Updates profile with new data(including image Uri)
-                        updateProfile(referenceToUser,newUsername,it, context)
+                        updateProfile(referenceToUser,newUsername,it, context,_callback)
+
+
                     }
                 }
             }else {
@@ -74,7 +76,7 @@ object ProfileAndImageManaging  {
 
 
     // Updates Image and Username
-    private fun updateProfile(ref : FirebaseAuth, newUsername : String, imageUriToSave : Uri, context: Context){
+    private fun updateProfile(ref : FirebaseAuth, newUsername : String, imageUriToSave : Uri,context : Context, _callback :()-> Unit){
 
         val updates = UserProfileChangeRequest.Builder()
             .setDisplayName(newUsername)
@@ -84,7 +86,13 @@ object ProfileAndImageManaging  {
         ref.currentUser!!.updateProfile(updates)
             ?.addOnCompleteListener{ task ->
                 if (task.isSuccessful){
+
                     Toast.makeText(context, "Profile info Updated", Toast.LENGTH_LONG).show()
+
+                    _callback()
+
+
+
                 } else {
                     Toast.makeText(context, task.exception?.message!!, Toast.LENGTH_LONG).show()
                 }

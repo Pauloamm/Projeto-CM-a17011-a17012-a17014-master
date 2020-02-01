@@ -96,19 +96,12 @@ class CreateCustomBouquetActivity : AppCompatActivity() {
     // Creates custom Bouquet from selected flowers
     private fun createCustomBouquet() : Bouquets{
 
-
-
         // Creates temporary flower list for custom bouquet creation
         var flowerListForCustomBouquet : MutableList<Flowers> = ArrayList<Flowers>()
 
-        for(x in 1..flowerSelectionManager.numberSunflowerSelected) flowerListForCustomBouquet.add(
-            Sunflower()
-        )
+        for(x in 1..flowerSelectionManager.numberSunflowerSelected) flowerListForCustomBouquet.add(Sunflower())
         for(x in 1..flowerSelectionManager.numberRoseSelected) flowerListForCustomBouquet.add(Rose())
-        for(x in 1..flowerSelectionManager.numberOrchidSelected) flowerListForCustomBouquet.add(
-            Orchid()
-        )
-
+        for(x in 1..flowerSelectionManager.numberOrchidSelected) flowerListForCustomBouquet.add(Orchid())
 
         // Gets custom name if the user enters one, otherwise gives it a default name ("Custom Bouquet")
         var customName = when{
@@ -116,12 +109,7 @@ class CreateCustomBouquetActivity : AppCompatActivity() {
             customNameTextView.text.toString().isEmpty() -> "Custom Bouquet"
             else -> customNameTextView.text.toString()
         }
-
-
         return  Bouquets(customName, flowerListForCustomBouquet, imageChoosing())
-
-
-
     }
 
     private fun imageChoosing() : Int{

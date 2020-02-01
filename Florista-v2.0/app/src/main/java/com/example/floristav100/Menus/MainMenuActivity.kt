@@ -27,30 +27,23 @@ class MainMenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_menu)
         supportActionBar!!.hide()
 
-
         // Gets instance of current player for data display
         ref = FirebaseAuth.getInstance()
 
-
         // Sets up initial view with data from profile
         initialViewSetup()
-
 
         // Manages Edit profile button click
         editButtonView.setOnClickListener{
 
             confirmPasswordDialog()
-
         }
 
         // Manages the 4 main buttons for different options
         mainMenuButtonsManager()
 
-
         // Manages instagram clicks
         instagramButtonsManager()
-
-
     }
 
     private fun initialViewSetup(){
@@ -61,14 +54,10 @@ class MainMenuActivity : AppCompatActivity() {
         // Updates TextViews with profile info
         usernameTextView.text = ref.currentUser!!.displayName
         emailTextView.text = ref.currentUser!!.email
-
-
     }
 
 
     private fun instagramButtonsManager(){
-
-
         // According to which insta selected it opens up for web or app view
 
         pauloInstaButtonView.setOnClickListener{
@@ -79,26 +68,23 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
         luisInstaButtonView.setOnClickListener{
-
             var url : String = "https://www.instagram.com/luismsilva99/"
             var intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
-
-
         }
-
     }
 
     private fun mainMenuButtonsManager(){
 
         historyButtonView.setOnClickListener{
+
             var intent = Intent(this, HistoryActivity::class.java)
             startActivity(intent)
         }
 
-
         availableBouquetsButtonView.setOnClickListener{
+
             var intent = Intent(this, AvailableBouquetsActivity::class.java)
             startActivity(intent)
 
@@ -112,23 +98,18 @@ class MainMenuActivity : AppCompatActivity() {
 
         transactionHistoryButtonView.setOnClickListener{
 
-
             var intent = Intent (this, HistoryTransactionActivity::class.java)
             startActivity(intent)
 
         }
-
-
     }
 
     private fun confirmPasswordDialog(){
-
 
         var dialog = AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK)
         val dialogView = layoutInflater.inflate(R.layout.dialog_password_check,null)
         dialog.setView(dialogView)
         dialog.setCancelable(true)
-
 
         dialog.show()
 
@@ -137,7 +118,6 @@ class MainMenuActivity : AppCompatActivity() {
             if (dialogView.dialogPasswordView.text.toString().isEmpty()){
                 dialogView.dialogPasswordView.error = "Please Enter Password"
                 dialogView.dialogPasswordView.requestFocus()
-
             }
             else
             ref.signInWithEmailAndPassword(ref.currentUser!!.email.toString(), dialogView.dialogPasswordView.text.toString())
@@ -145,17 +125,12 @@ class MainMenuActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         startActivityForResult(Intent(this, AccountSettingsActivity::class.java), 1)
                     }
-                    else
-                    {
-
+                    else {
                         dialogView.dialogPasswordView.error = "Wrong Password"
                         dialogView.dialogPasswordView.requestFocus()
                     }
                 }
-
-
         }
-        //--------------------------------
     }
 
 
@@ -163,7 +138,6 @@ class MainMenuActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
 
         // Manages result from AccountSettingsActivity(updating views)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK  )

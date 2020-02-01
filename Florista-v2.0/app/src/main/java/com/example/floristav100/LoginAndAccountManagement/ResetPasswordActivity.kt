@@ -19,7 +19,6 @@ class ResetPasswordActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reset_password)
         supportActionBar!!.hide()
 
-
         // Reference to Auth Firebase
         ref = FirebaseAuth.getInstance()
 
@@ -44,9 +43,6 @@ class ResetPasswordActivity : AppCompatActivity() {
             return
         }
         // Error management--------------------------
-
-
-
 
         // Sends email to reset password (forgot)
         ref.sendPasswordResetEmail(emailToResetView.text.toString())
